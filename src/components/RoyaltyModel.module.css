@@ -1,0 +1,482 @@
+.royaltySection {
+  background: rgba(10, 11, 16, 0.6);
+  position: relative;
+}
+
+.introCopy {
+  max-width: 800px;
+  margin: -40px auto 60px;
+  text-align: center;
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+}
+
+.modelSplit {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+@media (min-width: 992px) {
+  .modelSplit {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.problemCard {
+  background: rgba(239, 68, 68, 0.02);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  border-radius: 16px;
+  padding: 40px;
+}
+
+.problemCard h3 {
+  color: #f87171;
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+}
+
+.problemList {
+  list-style: none;
+}
+
+.problemItem {
+  margin-bottom: 16px;
+  display: flex;
+  gap: 12px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.problemItem strong {
+  color: var(--text-primary);
+}
+
+.crossIcon {
+  color: #ef4444;
+  font-weight: 800;
+}
+
+.alternativeCard {
+  background: rgba(16, 185, 129, 0.02);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  border-radius: 16px;
+  padding: 40px;
+}
+
+.alternativeCard h3 {
+  color: #34d399;
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+}
+
+.optionsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .optionsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.optionBlock {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 24px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.optionTitle {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.optionHeader {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+
+.alternativeCard .optionBlock:last-child .optionHeader {
+  color: var(--emerald);
+}
+
+.optionText {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Breakdown Visual Board */
+.breakdownSection {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px;
+  margin-bottom: 80px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.breakdownTitle {
+  font-size: 1.6rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.breakdownGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 992px) {
+  .breakdownGrid {
+    grid-template-columns: 1fr 1.2fr;
+  }
+}
+
+.mathPanel {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 28px;
+  border-radius: 12px;
+}
+
+.mathTitle {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #a5b4fc;
+  margin-bottom: 20px;
+}
+
+.mathSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mathStep {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.mathNum {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.examplePanel {
+  background: rgba(16, 185, 129, 0.01);
+  border: 1px solid rgba(16, 185, 129, 0.08);
+  padding: 28px;
+  border-radius: 12px;
+}
+
+.exampleTitle {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--emerald);
+  margin-bottom: 20px;
+}
+
+.exampleRates {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.rateLabel {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.rateVal {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.exampleTable {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.exampleRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.exampleRow strong {
+  color: var(--text-primary);
+}
+
+/* In Real Terms Columns */
+.realTermsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  margin-bottom: 80px;
+}
+
+@media (min-width: 768px) {
+  .realTermsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.realTermsCard {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 28px;
+  border-radius: 16px;
+}
+
+.realTermsCard h4 {
+  font-size: 1.15rem;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.realTermsList {
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.realTermsItem {
+  margin-bottom: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.realTermsItem:last-child {
+  margin-bottom: 0;
+}
+
+.checkIcon {
+  color: var(--emerald);
+}
+
+/* Comparison Table */
+.tableContainer {
+  overflow-x: auto;
+  margin-bottom: 80px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg-card);
+}
+
+.compTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 600px;
+}
+
+.compTable th {
+  padding: 20px 24px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.compTable td {
+  padding: 20px 24px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.compTable tr:last-child td {
+  border-bottom: none;
+}
+
+.compTable th:nth-child(3),
+.compTable td:nth-child(3) {
+  background: rgba(16, 185, 129, 0.02);
+  color: var(--text-primary);
+  border-left: 1px solid rgba(16, 185, 129, 0.1);
+  border-right: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.compTable tr:hover td {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.compTable tr:hover td:nth-child(3) {
+  background: rgba(16, 185, 129, 0.04);
+}
+
+/* Scenarios */
+.scenariosTitle {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.scenariosGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  margin-bottom: 80px;
+}
+
+@media (min-width: 992px) {
+  .scenariosGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.scenarioCard {
+  background: rgba(17, 22, 37, 0.4);
+  border: 1px solid var(--border);
+  padding: 32px;
+  border-radius: 16px;
+  transition: var(--transition-medium);
+}
+
+.scenarioCard:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+}
+
+.scenarioHeader {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.scenarioTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.scenarioList {
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.scenarioItem {
+  margin-bottom: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.scenarioItem:last-child {
+  margin-bottom: 0;
+}
+
+.arrowIcon {
+  color: var(--primary);
+}
+
+/* Quote */
+.quoteBlock {
+  background: rgba(99, 102, 241, 0.02);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 800px;
+  margin: 0 auto 80px;
+  text-align: center;
+  position: relative;
+}
+
+.quoteText {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.quoteAuthor {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--primary);
+}
+
+.quoteMeta {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* Call To Action */
+.ctaBox {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 60px 40px;
+  border-radius: 24px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ctaBox h3 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.ctaBox p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+}
+
+.ctaButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .ctaButtons {
+    flex-direction: row;
+  }
+}

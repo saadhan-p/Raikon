@@ -1,0 +1,191 @@
+.processSection {
+  background: rgba(10, 11, 16, 0.4);
+  position: relative;
+}
+
+.introCopy {
+  max-width: 600px;
+  margin: -40px auto 60px;
+  text-align: center;
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: 40px;
+  bottom: 40px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary), var(--purple), var(--emerald));
+  opacity: 0.3;
+}
+
+@media (min-width: 768px) {
+  .timeline::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.stepCard {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 80px;
+}
+
+@media (min-width: 768px) {
+  .stepCard {
+    flex-direction: row;
+    padding-left: 0;
+    width: 50%;
+    margin-bottom: 20px;
+  }
+
+  .stepCard:nth-child(even) {
+    margin-left: 50%;
+    padding-left: 50px;
+    justify-content: flex-start;
+  }
+
+  .stepCard:nth-child(odd) {
+    margin-right: 50%;
+    padding-right: 50px;
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  .stepCard:nth-child(odd) .cardContent {
+    align-items: flex-end;
+  }
+}
+
+.stepNumber {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+}
+
+@media (min-width: 768px) {
+  .stepNumber {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* Alternate colors along the timeline */
+.stepCard:nth-child(2) .stepNumber {
+  border-color: var(--purple);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
+}
+
+.stepCard:nth-child(3) .stepNumber {
+  border-color: var(--cyan);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+}
+
+.stepCard:nth-child(4) .stepNumber {
+  border-color: var(--emerald);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+}
+
+.cardContent {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 32px;
+  border-radius: 16px;
+  width: 100%;
+  transition: var(--transition-medium);
+  display: flex;
+  flex-direction: column;
+}
+
+.cardContent:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.stepHeader {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.stepTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.stepDesc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.deliverables {
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid var(--primary);
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  text-align: left;
+}
+
+.stepCard:nth-child(2) .deliverables {
+  border-left-color: var(--purple);
+}
+
+.stepCard:nth-child(3) .deliverables {
+  border-left-color: var(--cyan);
+}
+
+.stepCard:nth-child(4) .deliverables {
+  border-left-color: var(--emerald);
+}
+
+.deliverablesTitle {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  letter-spacing: 0.03em;
+}
+
+.deliverablesText {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}

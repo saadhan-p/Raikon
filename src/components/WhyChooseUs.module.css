@@ -1,0 +1,73 @@
+.whySection {
+  background: var(--bg-deep);
+  position: relative;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Make the 4th and 5th items span nicely if needed, or keep standard grid */
+}
+
+.card {
+  background: rgba(17, 22, 37, 0.4);
+  border: 1px solid var(--border);
+  padding: 36px;
+  border-radius: 16px;
+  transition: var(--transition-medium);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  background: var(--bg-card-hover);
+}
+
+/* Let's highlight card 2 (We Actually Care / Royalty focus) */
+.cardHighlight {
+  border-color: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 30px rgba(16, 185, 129, 0.05);
+}
+
+.cardHighlight:hover {
+  border-color: var(--emerald);
+  box-shadow: 0 10px 40px -10px rgba(16, 185, 129, 0.25);
+}
+
+.icon {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.cardHighlight .title {
+  color: #a7f3d0;
+}
+
+.desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
