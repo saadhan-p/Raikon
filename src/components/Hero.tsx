@@ -56,8 +56,12 @@ export default function Hero() {
       const hero = heroRef.current;
       if (!hero) return;
       const progress = Math.min(Math.max(window.scrollY / (window.innerHeight * 0.72), 0), 1);
+      // Scale Y start and travel distance with viewport height for mobile
+      const isMobile = window.innerWidth < 768;
+      const startY = isMobile ? window.innerHeight * 0.22 : 210;
+      const travelY = isMobile ? startY - 28 : 185;
       hero.style.setProperty("--brand-scale", String(1 - progress * 0.87));
-      hero.style.setProperty("--brand-y", `${210 - progress * 185}px`);
+      hero.style.setProperty("--brand-y", `${startY - progress * travelY}px`);
       hero.style.setProperty("--brand-opacity", "1");
       hero.style.setProperty("--scroll-offset", `${window.scrollY}px`);
       setRaikonAtHeader(progress >= 1);
