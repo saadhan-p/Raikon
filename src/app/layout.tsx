@@ -11,6 +11,14 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+import { Nova_Round } from 'next/font/google'
+
+const novaRound = Nova_Round({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-nova-round',
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -18,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={novaRound.variable}>
         {children}
       </body>
     </html>

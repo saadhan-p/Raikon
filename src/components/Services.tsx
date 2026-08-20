@@ -1,156 +1,304 @@
 "use client";
 
+import { useState, useRef, useCallback, useEffect } from "react";
 import styles from "./Services.module.css";
 
-interface ServiceItem {
+interface Service {
   id: string;
-  icon: string;
+  num: string;
   title: string;
+  category: string;
   tagline: string;
   description: string;
   features: string[];
-  isShowstopper?: boolean;
+  metric: string;
+  metricLabel: string;
 }
 
-const servicesData: ServiceItem[] = [
+const scrollPhrases = [
+  "You made it.",
+  "Looking sharp.",
+  "Well deserved.",
+  "Nicely done.",
+  "Keep going.",
+  "Quite the look.",
+  "Simply elegant.",
+  "Good things ahead.",
+  "Looking refined.",
+  "Onward and upward.",
+  "A fine choice.",
+  "You’ve got this.",
+  "Effortlessly good.",
+  "Keep it classy.",
+  "Nicely put.",
+];
+
+const services: Service[] = [
   {
-    id: "web-dev",
-    icon: "🚀",
-    title: "WEB DEVELOPMENT",
-    tagline: "The Showstopper",
-    description: "Your website is the first thing people see. Make it amazing. We don't build websites that just look pretty. We build websites that turn visitors into paying customers.",
+    id: "web",
+    num: "01",
+    title: "Web Development",
+    category: "DIGITAL PRODUCTS",
+    tagline: "Websites that sell while you sleep.",
+    description:
+      "We don't build pretty websites — we build revenue machines. Every pixel is engineered to move visitors through a journey that ends in action. Booked calls. Paid invoices. Brand believers.",
     features: [
-      "Built to make people buy",
-      "Works great on phones and computers",
-      "Super fast loading (people leave slow websites)",
-      "So easy to use it feels like magic"
+      "Conversion-first architecture",
+      "Sub-2s load times, anywhere in the world",
+      "Mobile-first, always",
+      "CMS you can actually use yourself",
     ],
-    isShowstopper: true
+    metric: "3×",
+    metricLabel: "avg. conversion lift",
   },
   {
-    id: "software-dev",
-    icon: "⚡",
-    title: "SOFTWARE DEVELOPMENT",
-    tagline: "Your Secret Weapon",
-    description: "Custom software gives you a real advantage. Basic tools give basic results. We build exactly what YOUR business needs to win.",
+    id: "software",
+    num: "02",
+    title: "Software Engineering",
+    category: "CUSTOM ENGINEERING",
+    tagline: "Your unfair advantage, written in code.",
+    description:
+      "Off-the-shelf software is everyone's solution — so it's no one's edge. We build exactly what your business needs. Lean, fast, and impossible to replicate.",
     features: [
-      "Built for how YOU work, not the other way around",
-      "Grows with you as you get bigger",
-      "Code that stays good as time goes on",
-      "No messy or broken code left behind"
-    ]
+      "Built around your exact workflows",
+      "Grows with you as you scale",
+      "Clean, documented, handover-ready code",
+      "No vendor lock-in. Ever.",
+    ],
+    metric: "100%",
+    metricLabel: "bespoke to your ops",
   },
   {
-    id: "cloud-infra",
-    icon: "☁️",
-    title: "CLOUD INFRASTRUCTURE",
-    tagline: "Rock-Solid Reliability",
-    description: "Your systems should work smoothly, even when you grow fast. We set up cloud systems that grow with you. Automatically handles more traffic. Costs stay fair. Backups are automatic.",
+    id: "cloud",
+    num: "03",
+    title: "Cloud Infrastructure",
+    category: "SCALABILITY",
+    tagline: "Built for the moment it all goes viral.",
+    description:
+      "Traffic spikes shouldn't be a crisis. We architect cloud systems that scale in seconds, cost less when quiet, and never let a big moment become a big failure.",
     features: [
-      "Works 99.99% of the time (we promise)",
-      "Super fast everywhere in the world",
-      "Costs are predictable, no surprise bills",
-      "Easy switch from old systems"
-    ]
+      "Auto-scaling on demand",
+      "Predictable billing — no surprise invoices",
+      "Global CDN & edge delivery",
+      "Disaster recovery built in",
+    ],
+    metric: "99.99%",
+    metricLabel: "uptime guarantee",
   },
   {
     id: "cyber",
-    icon: "🔒",
-    title: "CYBERSECURITY",
-    tagline: "Sleep Better at Night",
-    description: "Hackers are everywhere. We keep them out. We don't just fix problems—we think like hackers to stop them before they start.",
+    num: "04",
+    title: "Cybersecurity",
+    category: "PROTECTION",
+    tagline: "We think like attackers. So yours can't win.",
+    description:
+      "Most companies find out about a breach from their customers. We make sure you never have that conversation. Proactive, relentless, invisible.",
     features: [
-      "We test your system like a real hacker would",
-      "Watch 24/7 for attacks and stop them fast",
-      "Keep you safe from laws (GDPR, ISO, HIPAA)",
-      "Train your team to spot bad actors"
-    ]
+      "Penetration testing & red-team exercises",
+      "24/7 threat monitoring & response",
+      "GDPR, ISO 27001 & HIPAA alignment",
+      "Staff phishing & social engineering training",
+    ],
+    metric: "24/7",
+    metricLabel: "active threat monitoring",
   },
   {
     id: "support",
-    icon: "🛠️",
-    title: "SUPPORT & MAINTENANCE",
-    tagline: "Always There When You Need Us",
-    description: "Something breaks at 3 AM? We're already fixing it. No waiting. No confusing help. Just real people who get it.",
+    num: "05",
+    title: "Support & Maintenance",
+    category: "PARTNERSHIP",
+    tagline: "A team that answers at 3 AM. Seriously.",
+    description:
+      "We don't ghost after launch. Real people, real response times, real accountability. We treat your system like it's ours — because in many ways, it still is.",
     features: [
-      "We answer in 15 minutes or less (all day, every day)",
-      "We fix problems before they break",
-      "No long wait times or stuck tickets",
-      "We teach you how everything works"
-    ]
-  },
-  {
-    id: "hosting",
-    icon: "🌐",
-    title: "HOSTING SOLUTIONS",
-    tagline: "Fast & Reliable",
-    description: "Your website's home needs to be rock-solid. Super fast. Built to last. Works when you need it.",
-    features: [
-      "Built just for you (not a template for everyone)",
-      "Protected from hackers trying to attack (included free)",
-      "Auto backups so you never lose data",
-      "Fair prices, no hidden charges"
-    ]
+      "15-minute guaranteed first response",
+      "Proactive monitoring — we fix before you notice",
+      "Monthly performance & security reports",
+      "Dedicated account contact — no ticket queues",
+    ],
+    metric: "<15min",
+    metricLabel: "average response time",
   },
   {
     id: "consulting",
-    icon: "📊",
-    title: "CONSULTING & STRATEGY",
-    tagline: "Clear Answers to Tech Questions",
-    description: "Confused about what tech you actually need? We help you figure it out. Technology should help your business, not be the problem. We make sure your tech matches your goals.",
+    num: "06",
+    title: "Strategy & Consulting",
+    category: "INTELLIGENCE",
+    tagline: "Cut through tech noise. Move faster.",
+    description:
+      "We've seen what works and what bankrupts. Bring us in before you spend a rupee on software, vendors, or rebuilds. Our clients save an average of 40% on tech spend.",
     features: [
-      "Plans for changing your tech setup",
-      "Making your tools work better together",
-      "Finding the right vendors and deals",
-      "Ways to cut costs (we save clients 40% or more)"
-    ]
-  }
+      "Digital transformation roadmaps",
+      "Vendor selection & contract negotiation",
+      "Tech stack audit & optimisation",
+      "Cost-reduction analysis (avg. 40% savings)",
+    ],
+    metric: "40%",
+    metricLabel: "avg. tech cost savings",
+  },
 ];
 
 export default function Services() {
+  const [hovered, setHovered] = useState<string | null>(null);
+  const [active, setActive] = useState<Service | null>(null);
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [phrases, setPhrases] = useState<string[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  }, []);
+
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    document.body.style.overflow = active ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [active]);
+
+  // Update phrases randomly on scroll
+  useEffect(() => {
+    setPhrases(services.map(() => scrollPhrases[Math.floor(Math.random() * scrollPhrases.length)]));
+
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          if (Math.abs(currentScrollY - lastScrollY) > 450) {
+            setPhrases(services.map(() => scrollPhrases[Math.floor(Math.random() * scrollPhrases.length)]));
+            lastScrollY = currentScrollY;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section id="services" className={`section ${styles.servicesSection}`}>
-      <div className="glow-bg glow-emerald" style={{ top: "10%" }}></div>
-
-      <div className="container">
-        <div className="section-header">
-          <span className="badge">SERVICES</span>
-          <h2 className="section-title gradient-text">
-            We Solve Digital Chaos. <br />Think of Us as Your Tech Fixers.
-          </h2>
+    <section
+      id="services"
+      ref={sectionRef}
+      className={styles.section}
+      onMouseMove={handleMouseMove}
+    >
+      {/* Floating cursor metric tag */}
+      {hovered && (
+        <div
+          className={styles.cursorTag}
+          style={{ transform: `translate(${mouse.x + 18}px, ${mouse.y - 12}px)` }}
+        >
+          {services.find((s) => s.id === hovered)?.metric}
         </div>
-        
-        <p className={styles.introCopy}>
-          Every business we work with had the same problem: Messy systems. Slow response times. 
-          Security nightmares. Vendors who don't speak their language. <br />
-          <strong>We don't just fix problems—we architect solutions that scale with your ambitions.</strong>
-        </p>
+      )}
 
-        <div className={styles.grid}>
-          {servicesData.map((service) => (
-            <div 
-              key={service.id} 
-              className={`${styles.card} ${service.isShowstopper ? styles.cardShowstopper : ""}`}
+      {/* Section header */}
+      <div className={styles.sectionHeader}>
+        <div className={styles.sectionMeta}>
+          <span className={styles.metaTag}>Services</span>
+          <span className={styles.metaDivider}>/</span>
+          <span className={styles.metaCount}>06 capabilities</span>
+        </div>
+        <div className={styles.svcTitleBlock}>
+          <h2 className={styles.svcHeading}>
+            <span className={styles.svcHeadLight}>What we</span>
+            <span className={styles.svcHeadBold}>build for you.</span>
+          </h2>
+          <p className={styles.svcSub}>
+            Six weapons. One team.<br />Zero compromises.
+          </p>
+        </div>
+      </div>
+
+      {/* The list */}
+      <div className={styles.list}>
+        {services.map((svc, index) => (
+          <button
+            key={svc.id}
+            className={`${styles.row} ${hovered === svc.id ? styles.rowActive : ""}`}
+            onMouseEnter={() => setHovered(svc.id)}
+            onMouseLeave={() => setHovered(null)}
+            onClick={() => setActive(svc)}
+          >
+            <span className={styles.rowNum}>{svc.num}</span>
+            <span className={styles.rowTitle}>{svc.title}</span>
+            <span className={styles.rowDescriptor}>{svc.tagline}</span>
+            <span className={styles.rowYear}>{phrases[index] || ""}</span>
+            <span className={styles.rowArrow}>↗</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Bottom band */}
+      <div className={styles.bottomBand}>
+        <p className={styles.bottomCopy}>Not sure where to start?</p>
+        <a href="#contact" className={styles.bottomCta}>
+          Let&apos;s talk — it&apos;s free <span>↗</span>
+        </a>
+      </div>
+
+      {/* ── Drawer ── */}
+      {active && (
+        <>
+          {/* Scrim */}
+          <div
+            className={styles.scrim}
+            onClick={() => setActive(null)}
+          />
+
+          {/* Panel */}
+          <div className={styles.drawer}>
+            {/* Close */}
+            <button
+              className={styles.drawerClose}
+              onClick={() => setActive(null)}
+              aria-label="Close"
             >
-              <div className={styles.iconWrapper}>
-                <span>{service.icon}</span>
+              ✕
+            </button>
+
+            {/* Decorative background number */}
+            <span className={styles.drawerBgNum}>{active.num}</span>
+
+            {/* Content */}
+            <div className={styles.drawerContent}>
+              <div className={styles.drawerMeta}>
+                <span className={styles.drawerNum}>{active.num}</span>
+                <span className={styles.drawerCategory}>{active.category}</span>
               </div>
-              <h3 className={styles.title}>{service.title}</h3>
-              <div className={styles.tagline}>{service.tagline}</div>
-              <p className={service.description}>{service.description}</p>
-              
-              <ul className={styles.featureList}>
-                {service.features.map((feature, i) => (
-                  <li key={i} className={styles.featureItem}>
-                    <span className={styles.arrow}>→</span>
-                    <span>{feature}</span>
+
+              <h3 className={styles.drawerTitle}>{active.title}</h3>
+              <p className={styles.drawerTagline}>&ldquo;{active.tagline}&rdquo;</p>
+              <p className={styles.drawerDesc}>{active.description}</p>
+
+              <ul className={styles.drawerFeatures}>
+                {active.features.map((f, i) => (
+                  <li key={i} className={styles.drawerFeature}>
+                    <span className={styles.featureDot} />
+                    {f}
                   </li>
                 ))}
               </ul>
+
+              <div className={styles.drawerStat}>
+                <span className={styles.drawerStatVal}>{active.metric}</span>
+                <span className={styles.drawerStatLabel}>{active.metricLabel}</span>
+              </div>
+
+              <a href="#contact" className={styles.drawerCta} onClick={() => setActive(null)}>
+                Start this project <span>↗</span>
+              </a>
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
+        </>
+      )}
     </section>
   );
 }

@@ -102,8 +102,14 @@
 
 .metricsGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 20px;
+}
+
+@media (min-width: 480px) {
+  .metricsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .metricCard {

@@ -1,73 +1,347 @@
-.whySection {
-  background: var(--bg-deep);
+.wrapper {
+  background: #fff;
+  color: #0a0a0a;
+  font-family: 'Inter', -apple-system, sans-serif;
+  overflow: hidden;
   position: relative;
+  padding: 12vh 0 0;
 }
 
-.grid {
+/* ─── Header ─── */
+.header {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 6vw 10vh;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: end;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.header.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  /* Make the 4th and 5th items span nicely if needed, or keep standard grid */
+@media (max-width: 768px) {
+  .header { grid-template-columns: 1fr; gap: 1.5rem; }
 }
 
-.card {
-  background: rgba(17, 22, 37, 0.4);
-  border: 1px solid var(--border);
-  padding: 36px;
-  border-radius: 16px;
-  transition: var(--transition-medium);
+.eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #e8502a;
+  margin-bottom: 1.25rem;
+}
+
+.headerTitle {
+  font-size: clamp(2.5rem, 5vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.headerTitleLight { color: #d0d0d0; }
+
+.headerSub {
+  font-size: 1.125rem;
+  color: #888;
+  line-height: 1.6;
+  font-weight: 300;
+  max-width: 40ch;
+  align-self: end;
+  padding-bottom: 0.5rem;
+  margin: 0;
+}
+
+/* ─── Marquee Banner ─── */
+.marqueeWrap {
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 1.5rem 0;
+  margin-bottom: 0;
+  white-space: nowrap;
+  background: #fafafa;
+  transform: rotate(-2deg) scale(1.05);
+  transform-origin: center center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.02);
+}
+
+.marqueeTrack {
+  display: inline-flex;
+  gap: 0;
+  animation: marquee 20s linear infinite;
+  will-change: transform;
+}
+
+.marqueeItem {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #111;
+  padding: 0 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.marqueeItem::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background-color: #c6e288;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  flex-shrink: 0;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ─── Accordion List ─── */
+.accordionList {
+  max-width: 1100px;
+  margin: 0 auto 8vh;
+  padding: 0 6vw;
   display: flex;
   flex-direction: column;
 }
 
-.card:hover {
-  border-color: var(--primary);
-  transform: translateY(-4px);
-  background: var(--bg-card-hover);
+.accordionRow {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 2.5rem 0;
+  cursor: pointer;
+  position: relative;
+  transition: padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Let's highlight card 2 (We Actually Care / Royalty focus) */
-.cardHighlight {
-  border-color: rgba(16, 185, 129, 0.2);
-  box-shadow: 0 4px 30px rgba(16, 185, 129, 0.05);
+.accordionRow:first-child {
+  border-top: 1px solid #f0f0f0;
 }
 
-.cardHighlight:hover {
-  border-color: var(--emerald);
-  box-shadow: 0 10px 40px -10px rgba(16, 185, 129, 0.25);
+/* Hover expansion */
+.accordionRow:hover,
+.accordionOpen {
+  padding: 3.5rem 0;
 }
 
-.icon {
-  font-size: 2rem;
-  margin-bottom: 20px;
+/* Accordion Top (Visible always) */
+.accordionTop {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
 }
 
-.title {
-  font-size: 1.35rem;
+@media (max-width: 768px) {
+  .accordionTop {
+    gap: 1.5rem;
+  }
+}
+
+.accIndex {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #ccc;
+  width: 30px;
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.accordionRow:hover .accIndex,
+.accordionOpen .accIndex {
+  color: #e8502a;
+}
+
+.accMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.accTag {
+  font-size: 0.6rem;
   font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 16px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e8502a;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.cardHighlight .title {
-  color: #a7f3d0;
+.accordionRow:hover .accTag,
+.accordionOpen .accTag {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.desc {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
+.accTitle {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #0a0a0a;
+  margin: 0;
+  transition: color 0.3s ease, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: left center;
+}
+
+.accordionRow:hover .accTitle,
+.accordionOpen .accTitle {
+  transform: scale(1.05);
+}
+
+/* Plus/Minus Indicator */
+.accIndicator {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.accIndicator span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ccc;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.3s ease;
+}
+
+.accordionRow:hover .accIndicator span,
+.accordionOpen .accIndicator span {
+  background: #e8502a;
+}
+
+.accIndicator span:nth-child(1) {
+  width: 100%;
+  height: 2px;
+}
+
+.accIndicator span:nth-child(2) {
+  width: 2px;
+  height: 100%;
+}
+
+.accIndicatorOpen span:nth-child(2),
+.accordionRow:hover .accIndicator span:nth-child(2) {
+  transform: translate(-50%, -50%) rotate(90deg); /* turns into a minus */
+  opacity: 0;
+}
+
+/* Expandable Body */
+.accordionBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.accordionRow:hover .accordionBody,
+.accordionOpen .accordionBody {
+  grid-template-rows: 1fr;
+}
+
+.accordionBodyInner {
+  overflow: hidden;
+}
+
+.accDesc {
+  padding-top: 2rem;
+  padding-left: calc(30px + 3rem); /* Align with title */
+  font-size: 1.125rem;
+  color: #666;
+  line-height: 1.7;
+  font-weight: 300;
+  margin: 0;
+  max-width: 800px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+}
+
+@media (max-width: 768px) {
+  .accDesc {
+    padding-left: 0;
+    font-size: 1rem;
+  }
+}
+
+.accordionRow:hover .accDesc,
+.accordionOpen .accDesc {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ─── Closing Strip ─── */
+.closing {
+  margin-top: 0;
+  padding: 8vh 6vw;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.closingText {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0;
+}
+
+.closingAccent { color: #e8502a; }
+
+.closingCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 100px;
+  padding: 0.85rem 1.75rem;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  text-decoration: none;
+  background: transparent;
+}
+
+.closingCta:hover {
+  background: #e8502a;
+  border-color: #e8502a;
+}
+
+.ctaArrow {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.closingCta:hover .ctaArrow {
+  transform: translateX(4px);
 }

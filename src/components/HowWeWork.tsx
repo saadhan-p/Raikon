@@ -1,80 +1,119 @@
 "use client";
 
+import React, { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import styles from "./HowWeWork.module.css";
 
-interface StepItem {
-  number: number;
-  timeframe: string;
-  title: string;
-  description: string;
-  deliverable: string;
-}
+// Load the Canvas component only on client (no SSR) to avoid hydration issues
+const MagneticField = dynamic(() => import("./MagneticField"), { ssr: false });
 
-const stepsData: StepItem[] = [
+const steps = [
   {
-    number: 1,
+    number: "01",
     timeframe: "Week 1",
-    title: "GET TO KNOW YOU",
-    description: "We ask lots of questions. What's broken? What works? What keeps you up at night? We listen and learn. We don't assume.",
-    deliverable: "A full report of what we learned + Ideas for fixing it"
+    title: "Get to Know You",
+    description:
+      "We ask lots of questions. What's broken? What works? What keeps you up at night? We listen and learn. We don't assume.",
+    deliverable: "Full report of learnings + Ideas for fixing it",
   },
   {
-    number: 2,
-    timeframe: "Weeks 2 - 3",
-    title: "MAKE A PLAN",
-    description: "We design the solution. We explain every choice. No secrets. You know exactly what we're building and why.",
-    deliverable: "A clear roadmap + Timeline + Cost breakdown"
+    number: "02",
+    timeframe: "Weeks 2–3",
+    title: "Make a Plan",
+    description:
+      "We design the solution. We explain every choice. No secrets. You know exactly what we're building and why.",
+    deliverable: "Clear roadmap + Timeline + Cost breakdown",
   },
   {
-    number: 3,
+    number: "03",
     timeframe: "Weeks 4+",
-    title: "BUILD IT",
-    description: "We build it well, not just fast. Daily talks. You see progress. You give feedback early. No surprises. Weekly demos show real work.",
-    deliverable: "Software that works, not empty promises"
+    title: "Build It",
+    description:
+      "We build it well, not just fast. Daily talks. You see progress. You give feedback early. No surprises.",
+    deliverable: "Software that works, not empty promises",
   },
   {
-    number: 4,
+    number: "04",
     timeframe: "Launch & Beyond",
-    title: "LAUNCH & STAY",
-    description: "Launch day: We celebrate together. But we don't disappear. We stick around. We explain how everything works. We help your team. We're there 24/7.",
-    deliverable: "A system you understand + Full, long-term support"
-  }
+    title: "Launch & Stay",
+    description:
+      "We celebrate together. But we don't disappear. We stick around, explain everything, and stay 24/7.",
+    deliverable: "A system you understand + Full long-term support",
+  },
 ];
 
 export default function HowWeWork() {
-  return (
-    <section id="process" className={`section ${styles.processSection}`}>
-      <div className="glow-bg glow-primary" style={{ top: "20%", right: "10%" }}></div>
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-      <div className="container">
-        <div className="section-header">
-          <span className="badge">OUR PROCESS</span>
-          <h2 className="section-title gradient-text">
-            No Fluff. No Jargon. <br />Just Results.
-          </h2>
-          <p className="section-subtitle">
-            Most agencies talk a big game. We show you the plan.
-          </p>
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.visible);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+
+    cardRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section id="process" className={styles.wrapper}>
+      <div className={styles.splitContainer}>
+
+        {/* ─── Left Side (Sticky) ─── */}
+        <div className={styles.leftSide}>
+
+          {/* Full-panel canvas animation */}
+          <div className={styles.canvasWrap}>
+            <MagneticField />
+          </div>
+
+          {/* Text sits above the canvas */}
+          <div className={styles.headerText}>
+            <span className={styles.eyebrow}>Our Process</span>
+            <h2 className={styles.title}>
+              No Fluff.<br />
+              <span className={styles.titleLight}>Just Results.</span>
+            </h2>
+
+          </div>
+
         </div>
 
-        <div className={styles.timeline}>
-          {stepsData.map((step) => (
-            <div key={step.number} className={styles.stepCard}>
-              <div className={styles.stepNumber}>{step.number}</div>
-              
-              <div className={styles.cardContent}>
-                <div className={styles.stepHeader}>{step.timeframe}</div>
-                <h3 className={styles.stepTitle}>{step.title}</h3>
-                <p className={styles.stepDesc}>{step.description}</p>
-                
-                <div className={styles.deliverables}>
-                  <h4 className={styles.deliverablesTitle}>You Get:</h4>
-                  <p className={styles.deliverablesText}>{step.deliverable}</p>
+        {/* ─── Right Side (Scrolling Cards) ─── */}
+        <div className={styles.rightSide}>
+          {steps.map((step, i) => (
+            <div
+              key={step.number}
+              className={styles.card}
+              ref={el => { cardRefs.current[i] = el; }}
+            >
+              <div className={styles.cardTop}>
+                <span className={styles.cardNumber}>{step.number}</span>
+                <span className={styles.cardTime}>{step.timeframe}</span>
+              </div>
+              <div className={styles.cardDivider} />
+              <h3 className={styles.cardTitle}>{step.title}</h3>
+              <p className={styles.cardDesc}>{step.description}</p>
+              <div className={styles.deliverPill}>
+                <div className={styles.deliverDot} />
+                <div className={styles.deliverContent}>
+                  <span className={styles.deliverLabel}>You Get</span>
+                  <span className={styles.deliverText}>{step.deliverable}</span>
                 </div>
               </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

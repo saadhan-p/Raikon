@@ -29,33 +29,19 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className="container">
         <div className={styles.footerGrid}>
-          {/* Left Column: CTA */}
+          {/* Left Column: Logo & CTA */}
           <div className={styles.leftCol}>
+            <div style={{ marginBottom: "2rem" }}>
+              <img 
+                src="/raikon-logo-footer.png" 
+                alt="Raikon Logo" 
+                style={{ width: "200px", height: "auto" }} 
+              />
+            </div>
             <h3 className="gradient-text">
               Most tech companies are a gamble. <br />
               <span className="gradient-text-emerald">We're an investment.</span>
             </h3>
-            
-            <div className={styles.ctaGroup}>
-              <button 
-                className="btn btn-primary" 
-                onClick={() => scrollToSection("contact")}
-              >
-                Get Started
-              </button>
-              <button 
-                className="btn btn-secondary" 
-                onClick={() => scrollToSection("contact", true)}
-              >
-                Schedule a Call
-              </button>
-              <button 
-                className="btn btn-secondary" 
-                onClick={() => scrollToSection("cases")}
-              >
-                Check Our Case Studies
-              </button>
-            </div>
           </div>
 
           {/* Right Column: Brand Voice */}
@@ -81,8 +67,8 @@ export default function Footer() {
           </div>
           
           <div className={styles.locationInfo}>
-            <div>Based in San Francisco, CA | Serving businesses globally</div>
-            <div style={{ color: "var(--text-primary)" }}>Available 24/7 | Response time: Usually under 1 hour</div>
+            <div>Based in Mysuru</div>
+            <div style={{ color: "var(--text-primary)" }}>Response time: Usually under 1 hour</div>
           </div>
         </div>
       </div>

@@ -1,191 +1,216 @@
-.processSection {
-  background: rgba(10, 11, 16, 0.4);
+.wrapper {
+  background: #fafafa;
+  color: #000;
+  font-family: 'Inter', -apple-system, sans-serif;
   position: relative;
 }
 
-.introCopy {
-  max-width: 600px;
-  margin: -40px auto 60px;
-  text-align: center;
-  font-size: 1.15rem;
-  color: var(--text-secondary);
-}
-
-.timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  max-width: 900px;
+.splitContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1400px;
   margin: 0 auto;
-  position: relative;
 }
 
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 30px;
-  top: 40px;
-  bottom: 40px;
-  width: 2px;
-  background: linear-gradient(180deg, var(--primary), var(--purple), var(--emerald));
-  opacity: 0.3;
-}
-
-@media (min-width: 768px) {
-  .timeline::before {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-.stepCard {
+/* ─── Left Side: Sticky ─── */
+.leftSide {
+  position: sticky;
+  top: 0;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  position: relative;
-  padding-left: 80px;
+  justify-content: flex-start;
+  padding: 8vh 4vw;
+  border-right: 1px solid rgba(0,0,0,0.06);
+  overflow: hidden;
 }
 
-@media (min-width: 768px) {
-  .stepCard {
-    flex-direction: row;
-    padding-left: 0;
-    width: 50%;
-    margin-bottom: 20px;
-  }
-
-  .stepCard:nth-child(even) {
-    margin-left: 50%;
-    padding-left: 50px;
-    justify-content: flex-start;
-  }
-
-  .stepCard:nth-child(odd) {
-    margin-right: 50%;
-    padding-right: 50px;
-    justify-content: flex-end;
-    text-align: right;
-  }
-
-  .stepCard:nth-child(odd) .cardContent {
-    align-items: flex-end;
-  }
-}
-
-.stepNumber {
+/* The Canvas fills the entire left panel */
+.canvasWrap {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--bg-card);
-  border: 2px solid var(--primary);
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+}
+
+/* Text floats above the canvas */
+.headerText {
+  position: relative;
+  z-index: 10;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #e8502a;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.title {
+  font-size: clamp(2.5rem, 4.5vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.titleLight {
+  color: #c0c0c0;
+}
+
+/* Scroll hint */
+.scrollHint {
+  position: relative;
+  z-index: 10;
+  margin-top: 2.5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  z-index: 2;
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+  gap: 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #aaa;
 }
 
-@media (min-width: 768px) {
-  .stepNumber {
-    left: 50%;
-    transform: translateX(-50%);
-  }
+.scrollHintLine {
+  flex: 1;
+  max-width: 40px;
+  height: 1px;
+  background: linear-gradient(to right, #e8502a, transparent);
 }
 
-/* Alternate colors along the timeline */
-.stepCard:nth-child(2) .stepNumber {
-  border-color: var(--purple);
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
-}
-
-.stepCard:nth-child(3) .stepNumber {
-  border-color: var(--cyan);
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
-}
-
-.stepCard:nth-child(4) .stepNumber {
-  border-color: var(--emerald);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
-}
-
-.cardContent {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  padding: 32px;
-  border-radius: 16px;
-  width: 100%;
-  transition: var(--transition-medium);
+/* ─── Right Side: Scrolling Cards ─── */
+.rightSide {
+  padding: 15vh 5vw 15vh 4vw;
   display: flex;
   flex-direction: column;
+  gap: 5vh;
 }
 
-.cardContent:hover {
-  border-color: var(--border-hover);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+/* ─── Card ─── */
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 3rem;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.02),
+    0 8px 24px rgba(0,0,0,0.03);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.4s ease;
+  /* Scroll reveal */
+  opacity: 0;
+  transform: translateY(50px);
+  will-change: transform, opacity;
 }
 
-.stepHeader {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover {
+  border-color: rgba(232, 80, 42, 0.2);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.03),
+    0 8px 24px rgba(232, 80, 42, 0.06);
+}
+
+.cardTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+}
+
+.cardNumber {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: #f0f0f0;
+  line-height: 1;
+}
+
+.cardTime {
+  font-size: 0.7rem;
   font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-secondary);
-  margin-bottom: 8px;
+  color: #bbb;
 }
 
-.stepTitle {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: var(--text-primary);
+.cardDivider {
+  width: 100%;
+  height: 1px;
+  background: #f0f0f0;
+  margin-bottom: 1.75rem;
 }
 
-.stepDesc {
+.cardTitle {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  color: #111;
+}
+
+.cardDesc {
+  font-size: 1.05rem;
+  color: #777;
+  line-height: 1.7;
+  font-weight: 300;
+  margin: 0 0 1.5rem;
+}
+
+.deliverPill {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: #fff7f5;
+  border: 1px solid rgba(232, 80, 42, 0.1);
+  border-radius: 12px;
+  padding: 0.9rem 1.2rem;
+}
+
+.deliverDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e8502a;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.deliverContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.deliverLabel {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e8502a;
+}
+
+.deliverText {
   font-size: 0.95rem;
-  color: var(--text-secondary);
-  margin-bottom: 20px;
-  line-height: 1.5;
+  color: #555;
+  line-height: 1.4;
 }
 
-.deliverables {
-  background: rgba(255, 255, 255, 0.02);
-  border-left: 3px solid var(--primary);
-  padding: 16px;
-  border-radius: 0 8px 8px 0;
-  text-align: left;
-}
-
-.stepCard:nth-child(2) .deliverables {
-  border-left-color: var(--purple);
-}
-
-.stepCard:nth-child(3) .deliverables {
-  border-left-color: var(--cyan);
-}
-
-.stepCard:nth-child(4) .deliverables {
-  border-left-color: var(--emerald);
-}
-
-.deliverablesTitle {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  letter-spacing: 0.03em;
-}
-
-.deliverablesText {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  font-weight: 500;
+/* ─── Mobile ─── */
+@media (max-width: 900px) {
+  .splitContainer { grid-template-columns: 1fr; }
+  .leftSide { position: relative; height: 50vh; min-height: 400px; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .rightSide { padding: 8vh 5vw; }
+  .card { padding: 1.75rem; }
+  .cardNumber { font-size: 2.5rem; }
 }

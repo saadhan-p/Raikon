@@ -1,69 +1,131 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import styles from "./WhyChooseUs.module.css";
 
-interface WhyItem {
-  icon: string;
-  title: string;
-  desc: string;
-  isHighlighted?: boolean;
-}
-
-const whyData: WhyItem[] = [
+const reasons = [
   {
-    icon: "📈",
+    tag: "Proven",
     title: "Experience Counts",
-    desc: "Our team has built solutions for everyone from scrappy startups to Fortune 500 companies. We know what works. We know what fails. We've made every mistake so you don't have to."
+    desc: "Our team has built solutions for everyone from scrappy startups to Fortune 500 companies. We know what works. We know what fails. We've made every mistake so you don't have to.",
   },
   {
-    icon: "🤝",
+    tag: "Aligned",
     title: "We Actually Care",
-    desc: "Your success is our bonus check. (We align with fixed-price, performance-based models.) No 'more hours billed = more profit' trap. When you win, we win. When you suffer, we feel it.",
-    isHighlighted: true
+    desc: "Your success is our bonus check. We align with fixed-price, performance-based models. No 'more hours billed = more profit' trap. When you win, we win. When you suffer, we feel it.",
   },
   {
-    icon: "💎",
+    tag: "Open",
     title: "Transparency Is Oxygen",
-    desc: "No surprise invoices. No secret meetings. No vendor lock-in clauses hiding in the fine print. Your code is yours. Your data is yours. We'll help you leave if you want to. (You won't.)"
+    desc: "No surprise invoices. No secret meetings. No vendor lock-in clauses hiding in the fine print. Your code is yours. Your data is yours. We'll help you leave if you want to. (You won't.)",
   },
   {
-    icon: "⚡",
+    tag: "Fast",
     title: "Speed Without Sacrifice",
-    desc: "Fast doesn't mean sloppy. We move quick because we know what we're doing. Tested. Documented. Production-ready. Delivered when we said we would."
+    desc: "Fast doesn't mean sloppy. We move quick because we know what we're doing. Tested. Documented. Production-ready. Delivered when we said we would.",
   },
   {
-    icon: "🛠️",
-    title: "The Tech Doesn't Matter (Except It Does)",
-    desc: "We pick the right tool for your problem, not the trendy tool we learned last month. React? Django? Node? AWS? GCP? We know them all. We'll pick what serves YOU best."
-  }
+    tag: "Precise",
+    title: "The Right Tool for You",
+    desc: "We pick the right tool for your problem, not the trendy tool we learned last month. React? Django? Node? AWS? GCP? We know them all. We'll pick what serves you best.",
+  },
+];
+
+const marqueeItems = [
+  "Experience", "Transparency", "Speed", "Trust", "Results",
+  "Honesty", "Craft", "Partnership", "Excellence", "Clarity",
 ];
 
 export default function WhyChooseUs() {
-  return (
-    <section id="why-us" className={`section ${styles.whySection}`}>
-      <div className="glow-bg glow-purple" style={{ bottom: "10%", right: "5%" }}></div>
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
 
-      <div className="container">
-        <div className="section-header">
-          <span className="badge">WHY CHOOSE US</span>
-          <h2 className="section-title gradient-text">
-            We're Not Like The Others <br />(And We Can Prove It)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add(styles.visible);
+        });
+      },
+      { threshold: 0.1 }
+    );
+    if (headerRef.current) observer.observe(headerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section id="why-us" className={styles.wrapper}>
+
+      {/* ── Header ── */}
+      <div className={styles.header} ref={headerRef}>
+        <div>
+          <span className={styles.eyebrow}>Why Choose Us</span>
+          <h2 className={styles.headerTitle}>
+            Not Like<br />
+            <span className={styles.headerTitleLight}>The Others.</span>
           </h2>
         </div>
+        <p className={styles.headerSub}>
+          Five reasons why teams who've tried the rest choose us to build what matters most.
+        </p>
+      </div>
 
-        <div className={styles.grid}>
-          {whyData.map((item, index) => (
-            <div 
-              key={index} 
-              className={`${styles.card} ${item.isHighlighted ? styles.cardHighlight : ""}`}
+      {/* ── Accordion List ── */}
+      <div className={styles.accordionList}>
+        {reasons.map((r, i) => {
+          const isOpen = activeIndex === i;
+          return (
+            <div
+              key={i}
+              className={`${styles.accordionRow} ${isOpen ? styles.accordionOpen : ""}`}
+              onMouseEnter={() => setActiveIndex(i)}
+              onMouseLeave={() => setActiveIndex(null)}
             >
-              <div className={styles.icon}>{item.icon}</div>
-              <h3 className={styles.title}>{item.title}</h3>
-              <p className={styles.desc}>{item.desc}</p>
+              <div className={styles.accordionTop}>
+                <span className={styles.accIndex}>{String(i + 1).padStart(2, "0")}</span>
+
+                <div className={styles.accMain}>
+                  <span className={styles.accTag}>{r.tag}</span>
+                  <h3 className={styles.accTitle}>{r.title}</h3>
+                </div>
+
+                {/* Animated arrow/plus indicator */}
+                <div className={`${styles.accIndicator} ${isOpen ? styles.accIndicatorOpen : ""}`}>
+                  <span />
+                  <span />
+                </div>
+              </div>
+
+              {/* Expandable description */}
+              <div className={styles.accordionBody}>
+                <div className={styles.accordionBodyInner}>
+                  <p className={styles.accDesc}>{r.desc}</p>
+                </div>
+              </div>
             </div>
+          );
+        })}
+      </div>
+
+      {/* ── Marquee ── */}
+      <div className={styles.marqueeWrap}>
+        <div className={styles.marqueeTrack}>
+          {[...marqueeItems, ...marqueeItems].map((item, i) => (
+            <span key={i} className={styles.marqueeItem}>{item}</span>
           ))}
         </div>
       </div>
+
+      {/* ── Closing Strip ── */}
+      <div className={styles.closing}>
+        <p className={styles.closingText}>
+          Ready to work with a team that <span className={styles.closingAccent}>actually delivers?</span>
+        </p>
+        <a href="#contact" className={styles.closingCta}>
+          Let's Talk <span className={styles.ctaArrow}>→</span>
+        </a>
+      </div>
+
     </section>
   );
 }
