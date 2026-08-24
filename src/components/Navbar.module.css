@@ -38,10 +38,21 @@
 /* ── Pixel bar icon ── */
 .brandIcon {
   display: flex;
-  align-items: flex-end;
-  gap: 3px;
-  height: 20px;
+  align-items: flex-start;
+  gap: 2px;
   flex-shrink: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.brandText {
+  font-family: var(--font-nova-round), system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 1.15rem;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  color: #E14E26;
+  line-height: 1;
 }
 
 
@@ -129,7 +140,7 @@
 }
 
 .navItem:hover {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   color: #c9e28a;
 }
 
@@ -184,12 +195,25 @@
 }
 
 @media (max-width: 700px) {
-  .header { padding: 0 12px; }
-  .headerBar { padding: 0 14px; }
-  .centerMeta { 
+  .header {
+    padding: 0 12px;
+  }
+
+  .headerBar {
+    padding: 0 14px;
+  }
+
+  .centerMeta {
     font-size: 0.55rem;
     letter-spacing: 0.12em;
   }
-  .menuOverlay { top: 82px; width: calc(100% - 24px); }
-  .ctaRow { grid-template-columns: 1fr; }
+
+  .menuOverlay {
+    top: 82px;
+    width: calc(100% - 24px);
+  }
+
+  .ctaRow {
+    grid-template-columns: 1fr;
+  }
 }

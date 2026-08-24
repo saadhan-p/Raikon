@@ -55,7 +55,8 @@ export default function Hero() {
     const updateBrand = () => {
       const hero = heroRef.current;
       if (!hero) return;
-      const progress = Math.min(Math.max(window.scrollY / (window.innerHeight * 0.72), 0), 1);
+      const scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      const progress = Math.min(Math.max(scrollY / (window.innerHeight * 0.72), 0), 1);
       // Scale Y start and travel distance with viewport height for mobile
       const isMobile = window.innerWidth < 768;
       const startY = isMobile ? window.innerHeight * 0.22 : 210;
@@ -63,13 +64,18 @@ export default function Hero() {
       hero.style.setProperty("--brand-scale", String(1 - progress * 0.87));
       hero.style.setProperty("--brand-y", `${startY - progress * travelY}px`);
       hero.style.setProperty("--brand-opacity", "1");
-      hero.style.setProperty("--scroll-offset", `${window.scrollY}px`);
+      hero.style.setProperty("--scroll-offset", `${scrollY}px`);
       setRaikonAtHeader(progress >= 1);
     };
     updateBrand();
     window.addEventListener("scroll", updateBrand, { passive: true });
+    window.addEventListener("touchmove", updateBrand, { passive: true });
     window.addEventListener("resize", updateBrand);
-    return () => { window.removeEventListener("scroll", updateBrand); window.removeEventListener("resize", updateBrand); };
+    return () => { 
+      window.removeEventListener("scroll", updateBrand); 
+      window.removeEventListener("touchmove", updateBrand);
+      window.removeEventListener("resize", updateBrand); 
+    };
   }, []);
 
   return (
@@ -105,33 +111,64 @@ export default function Hero() {
       <div className="container">
         <div className={styles.openingFrame}>
           <div
-            className={styles.metaStrip}
+            className={styles.metaStripWrapper}
             style={{
               opacity: raikonAtHeader ? 0 : 1,
               pointerEvents: raikonAtHeader ? "none" : "auto",
               transition: "opacity 0.3s ease",
             }}
           >
-            <div className={styles.metaLeft}>
-              <span>5+ PROJECTS</span>
-              <span>MYSURU BASED</span>
-              <span className={styles.clockSpan}>
-                [ <i className={styles.redDot}></i> {time || "20 : 57 : 41"} ]
-              </span>
+            {/* Desktop Meta Strip */}
+            <div className={`${styles.metaStrip} ${styles.desktopMeta}`}>
+              <div className={styles.metaLeft}>
+                <span>5+ PROJECTS</span>
+                <span>MYSURU BASED</span>
+                <span className={styles.clockSpan}>
+                  [ <i className={styles.redDot}></i> {time || "20 : 57 : 41"} ]
+                </span>
+              </div>
+              <div className={styles.metaRight}>
+                <span className={styles.metaLabel}>FOLLOW US</span>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">INSTAGRAM +</a>
+                <a href="https://www.linkedin.com/company/raikon-tech" target="_blank" rel="noopener noreferrer">LINKEDIN +</a>
+                <button
+                  className={styles.langToggle}
+                  onClick={() => setLang(lang === "EN" ? "NL" : "EN")}
+                  aria-label="Toggle language"
+                >
+                  <span className={lang === "NL" ? styles.langActive : ""}></span>
+                  <span className={styles.langDot}></span>
+                  <span className={lang === "EN" ? styles.langActive : ""}>EN</span>
+                </button>
+              </div>
             </div>
-            <div className={styles.metaRight}>
-              <span className={styles.metaLabel}>FOLLOW US</span>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">INSTAGRAM +</a>
-              <a href="https://www.linkedin.com/company/raikon-tech" target="_blank" rel="noopener noreferrer">LINKEDIN +</a>
-              <button
-                className={styles.langToggle}
-                onClick={() => setLang(lang === "EN" ? "NL" : "EN")}
-                aria-label="Toggle language"
-              >
-                <span className={lang === "NL" ? styles.langActive : ""}></span>
-                <span className={styles.langDot}></span>
-                <span className={lang === "EN" ? styles.langActive : ""}>EN</span>
-              </button>
+
+            {/* Mobile Meta Strip */}
+            <div className={`${styles.metaStrip} ${styles.mobileMeta}`}>
+              <div className={styles.mobileMetaGrid}>
+                <div className={styles.mobileMetaCell}>
+                  <span className={styles.cellLabel}>LOCATION</span>
+                  <span className={styles.cellValue}>MYSURU, IND</span>
+                </div>
+                <div className={styles.mobileMetaCell}>
+                  <span className={styles.cellLabel}>EXPERIENCE</span>
+                  <span className={styles.cellValue}>5+ PROJECTS</span>
+                </div>
+                <div className={styles.mobileMetaCell}>
+                  <span className={styles.cellLabel}>LOCAL TIME</span>
+                  <span className={styles.clockSpan}>
+                    <i className={styles.redDot}></i> {time || "20 : 57 : 41"}
+                  </span>
+                </div>
+                <div className={styles.mobileMetaCell}>
+                  <span className={styles.cellLabel}>NETWORK</span>
+                  <div className={styles.cellSocials}>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">IG</a>
+                    <span className={styles.separator}>/</span>
+                    <a href="https://www.linkedin.com/company/raikon-tech" target="_blank" rel="noopener noreferrer">IN</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

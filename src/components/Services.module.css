@@ -272,7 +272,7 @@
   background: rgba(16, 16, 16, 0.45);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  z-index: 200;
+  z-index: 1100;
   animation: scrimIn 0.4s ease forwards;
 }
 
@@ -288,7 +288,7 @@
   width: min(560px, 100vw);
   height: 100dvh;
   background: var(--paper);
-  z-index: 300;
+  z-index: 1200;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -300,21 +300,28 @@
   to   { transform: translateX(0); }
 }
 
+@keyframes sheetIn {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
 .drawerClose {
   all: unset;
-  cursor: none;
-  position: absolute;
-  top: 28px;
-  right: 28px;
-  z-index: 10;
-  font-size: 1rem;
-  color: var(--muted);
-  width: 40px;
-  height: 40px;
+  cursor: pointer;
+  position: sticky;
+  top: 0;
+  z-index: 400;
+  margin-left: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  font-size: 1rem;
+  color: var(--muted);
   border: 1px solid var(--line);
+  background: var(--paper);
   transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -523,7 +530,92 @@
     text-align: left;
   }
 
+  /* ── Bottom sheet on mobile ── */
+  .drawer {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 88dvh;
+    border-radius: 20px 20px 0 0;
+    animation: sheetIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Drag handle pill at top of sheet */
+  .drawer::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: var(--line);
+    border-radius: 99px;
+    margin: 14px auto 0;
+    flex-shrink: 0;
+  }
+
+  .drawerClose {
+    position: sticky;
+    top: 0;
+    margin: 0;
+    background: var(--paper);
+    border-radius: 0;
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: 0 20px;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    z-index: 1300;
+    flex-shrink: 0;
+  }
+
+  .drawerClose::before {
+    content: 'CLOSE';
+  }
+
+  /* Hide the big decorative bg number on mobile — too cluttered */
+  .drawerBgNum {
+    display: none;
+  }
+
   .drawerContent {
-    padding: 70px 28px 50px;
+    padding: 20px 24px 40px;
+  }
+
+  .drawerTitle {
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    margin-bottom: 10px;
+  }
+
+  .drawerTagline {
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+
+  .drawerDesc {
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .drawerStat {
+    padding: 16px 0;
+    margin: 14px 0 0;
+  }
+
+  .drawerStatVal {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+
+  .drawerCta {
+    margin-top: 20px;
+    padding: 14px 20px;
+    font-size: 0.75rem;
   }
 }

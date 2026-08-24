@@ -40,8 +40,9 @@ export default function Navbar() {
     let ticking = false;
 
     const handleScroll = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
       // The hero wordmark finishes moving at window.innerHeight * 0.72
-      if (window.scrollY >= window.innerHeight * 0.72) {
+      if (scrollY >= window.innerHeight * 0.72) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -49,7 +50,7 @@ export default function Navbar() {
 
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY;
+          const currentScrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
           if (Math.abs(currentScrollY - lastScrollY) > 450) {
             setPhrase(scrollPhrases[Math.floor(Math.random() * scrollPhrases.length)]);
             lastScrollY = currentScrollY;
@@ -60,8 +61,12 @@ export default function Navbar() {
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("touchmove", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("touchmove", handleScroll);
+    };
   }, []);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -79,11 +84,12 @@ export default function Navbar() {
       {/* Floating pill header bar */}
       <header className={`${styles.header} ${scrolled ? styles.headerVisible : ""}`}>
         <div className={styles.headerBar}>
-          <div className={styles.brandIcon}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#E14E26">
+          <a href="#hero" className={styles.brandIcon} onClick={(e) => handleLinkClick(e, "hero")}>
+            <span className={styles.brandText}>raikon</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#E14E26">
               <path d="M11.2 2.4L2.8 13.6h7.6l-1.6 8 8.8-11.2h-7.6l1.6-8z" />
             </svg>
-          </div>
+          </a>
           <span className={styles.centerMeta}>{phrase}</span>
           <button
             className={styles.menuBtn}
