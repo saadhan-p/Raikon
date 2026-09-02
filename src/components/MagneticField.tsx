@@ -31,7 +31,7 @@ export default function MagneticField({ className }: AttractorProps) {
 
     let animId: number;
     const particles: Particle[] = [];
-    const PARTICLE_COUNT = 120;
+    const PARTICLE_COUNT = 600;
 
     const resize = () => {
       canvas.width = canvas.offsetWidth;
@@ -122,7 +122,7 @@ export default function MagneticField({ className }: AttractorProps) {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 60) {
             const alpha = (1 - dist / 60) * 0.15 * a.opacity * b.opacity;
-            ctx.strokeStyle = `rgba(232,80,42,${alpha})`;
+            ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -177,7 +177,7 @@ export default function MagneticField({ className }: AttractorProps) {
         // Draw particle dot
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(232,80,42,${p.opacity * 0.7})`;
+        ctx.fillStyle = `rgba(255,255,255,${p.opacity * 0.7})`;
         ctx.fill();
 
         // Respawn dead or out-of-bounds particles

@@ -143,7 +143,14 @@ export default function Services() {
   const [active, setActive] = useState<Service | null>(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [phrases, setPhrases] = useState<string[]>([]);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const checkTouch = () => setIsTouchDevice(window.matchMedia('(hover: none)').matches);
+    checkTouch();
+    window.matchMedia('(hover: none)').addEventListener('change', checkTouch);
+  }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     const rect = sectionRef.current?.getBoundingClientRect();
@@ -223,8 +230,8 @@ export default function Services() {
           <button
             key={svc.id}
             className={`${styles.row} ${hovered === svc.id ? styles.rowActive : ""}`}
-            onMouseEnter={() => setHovered(svc.id)}
-            onMouseLeave={() => setHovered(null)}
+            onMouseEnter={() => !isTouchDevice && setHovered(svc.id)}
+            onMouseLeave={() => !isTouchDevice && setHovered(null)}
             onClick={() => setActive(svc)}
           >
             <span className={styles.rowNum}>{svc.num}</span>

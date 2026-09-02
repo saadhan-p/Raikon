@@ -118,7 +118,7 @@
 /* ── Each row ── */
 .row {
   all: unset;
-  cursor: none;
+  cursor: pointer;
   display: grid;
   grid-template-columns: 56px 1fr auto auto 40px;
   align-items: center;
@@ -127,6 +127,9 @@
   border-bottom: 1px solid var(--line);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 
   background-image: linear-gradient(to right, var(--ink) 0%, var(--ink) 100%);
   background-size: 0% 100%;
@@ -135,6 +138,13 @@
   transition:
     background-size 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     padding-left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Only use cursor: none on non-touch devices */
+@media (hover: hover) {
+  .row {
+    cursor: none;
+  }
 }
 
 .rowActive {
@@ -159,6 +169,9 @@
   letter-spacing: -0.035em;
   color: var(--ink);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
   position: relative;
   z-index: 1;
   transition: color 0.3s ease;
@@ -496,12 +509,20 @@
 @media (max-width: 768px) {
   .row {
     grid-template-columns: 36px 1fr 32px;
-    gap: 8px 16px;
-    padding: 24px clamp(24px, 5vw, 100px);
+    gap: 4px 12px;
+    padding: 22px 20px;
   }
 
   .rowNum { grid-column: 1; grid-row: 1; align-self: center; }
-  .rowTitle { grid-column: 2; grid-row: 1; align-self: center; }
+  .rowTitle { 
+    grid-column: 2; 
+    grid-row: 1; 
+    align-self: center;
+    font-size: clamp(1.1rem, 5vw, 1.6rem);
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
   .rowArrow { grid-column: 3; grid-row: 1; align-self: center; }
   
   .rowYear {

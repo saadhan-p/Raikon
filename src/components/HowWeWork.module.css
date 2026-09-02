@@ -1,216 +1,159 @@
+/* ══════════════════════════════════════
+   HOW WE WORK
+   ══════════════════════════════════════ */
+
 .wrapper {
-  background: #fafafa;
-  color: #000;
-  font-family: 'Inter', -apple-system, sans-serif;
+  height: 500vh;
   position: relative;
+  background: #080808;
 }
 
-.splitContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-/* ─── Left Side: Sticky ─── */
-.leftSide {
+.sticky {
   position: sticky;
   top: 0;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 8vh 4vw;
-  border-right: 1px solid rgba(0,0,0,0.06);
+  width: 100%;
+  display: grid;
+  grid-template-columns: 42% 58%;
   overflow: hidden;
+  background: #080808;
 }
 
-/* The Canvas fills the entire left panel */
-.canvasWrap {
+.canvasBg {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  inset: 0;
   z-index: 0;
+  opacity: 0.8;
+  pointer-events: none;
 }
 
-/* Text floats above the canvas */
-.headerText {
+/* ════════════ LEFT ════════════ */
+.leftPanel {
   position: relative;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 4vw 0 7vw;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .eyebrow {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
   color: #e8502a;
-  margin-bottom: 1rem;
+  margin: 0 0 1.5rem;
+  display: block;
+  font-family: 'Inter', sans-serif;
+}
+
+.headline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  margin: 0 0 4rem;
+  color: #ffffff;
+}
+
+.headlineMuted {
+  color: rgba(255, 255, 255, 0.14);
   display: block;
 }
 
-.title {
-  font-size: clamp(2.5rem, 4.5vw, 5rem);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
-  margin: 0;
+/* Dot nav */
+.dotRow {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
 }
 
-.titleLight {
-  color: #c0c0c0;
-}
-
-/* Scroll hint */
-.scrollHint {
-  position: relative;
-  z-index: 10;
-  margin-top: 2.5rem;
+.dotItem {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #aaa;
+  gap: 1.2rem;
 }
 
-.scrollHintLine {
-  flex: 1;
-  max-width: 40px;
-  height: 1px;
-  background: linear-gradient(to right, #e8502a, transparent);
-}
-
-/* ─── Right Side: Scrolling Cards ─── */
-.rightSide {
-  padding: 15vh 5vw 15vh 4vw;
+.dotCircle {
   display: flex;
-  flex-direction: column;
-  gap: 5vh;
-}
-
-/* ─── Card ─── */
-.card {
-  background: #fff;
-  border-radius: 20px;
-  padding: 3rem;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow:
-    0 2px 4px rgba(0,0,0,0.02),
-    0 8px 24px rgba(0,0,0,0.03);
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              box-shadow 0.4s ease;
-  /* Scroll reveal */
-  opacity: 0;
-  transform: translateY(50px);
-  will-change: transform, opacity;
-}
-
-.card.visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.card:hover {
-  border-color: rgba(232, 80, 42, 0.2);
-  box-shadow:
-    0 2px 8px rgba(0,0,0,0.03),
-    0 8px 24px rgba(232, 80, 42, 0.06);
-}
-
-.cardTop {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 1.75rem;
-}
-
-.cardNumber {
-  font-size: 3.5rem;
-  font-weight: 900;
-  letter-spacing: -0.05em;
-  color: #f0f0f0;
-  line-height: 1;
-}
-
-.cardTime {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #bbb;
-}
-
-.cardDivider {
-  width: 100%;
-  height: 1px;
-  background: #f0f0f0;
-  margin-bottom: 1.75rem;
-}
-
-.cardTitle {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  margin: 0 0 1rem;
-  color: #111;
-}
-
-.cardDesc {
-  font-size: 1.05rem;
-  color: #777;
-  line-height: 1.7;
-  font-weight: 300;
-  margin: 0 0 1.5rem;
-}
-
-.deliverPill {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  background: #fff7f5;
-  border: 1px solid rgba(232, 80, 42, 0.1);
-  border-radius: 12px;
-  padding: 0.9rem 1.2rem;
-}
-
-.deliverDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #e8502a;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.2);
+  font-family: 'Inter', sans-serif;
+  transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
   flex-shrink: 0;
-  margin-top: 6px;
+  background: transparent;
+  border: none;
 }
 
-.deliverContent {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.deliverLabel {
-  font-size: 0.6rem;
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+.dotActive .dotCircle {
   color: #e8502a;
+  transform: scale(1.12);
 }
 
-.deliverText {
-  font-size: 0.95rem;
-  color: #555;
-  line-height: 1.4;
+.dotDone .dotCircle {
+  color: #e8502a;
+  opacity: 0.7;
 }
 
-/* ─── Mobile ─── */
+.dotLbl {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.18);
+  transition: color 0.4s ease;
+  letter-spacing: 0.02em;
+}
+
+.dotActive .dotLbl {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ════════════ RIGHT ════════════ */
+.rightPanel {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  padding: 0 6vw;
+}
+
+/* ════════════ PROGRESS ════════════ */
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 100;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(to right, #e8502a, #ff7043);
+  transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 0 10px rgba(232, 80, 42, 0.5);
+}
+
+/* ════════════ MOBILE ════════════ */
 @media (max-width: 900px) {
-  .splitContainer { grid-template-columns: 1fr; }
-  .leftSide { position: relative; height: auto; min-height: unset; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); padding: 8vh 5vw 4vh; }
-  .rightSide { padding: 8vh 5vw; }
-  .card { padding: 1.75rem; }
-  .cardNumber { font-size: 2.5rem; }
+  .wrapper { height: 450vh; }
+  .sticky {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .leftPanel {
+    padding: 5rem 5vw 2rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    justify-content: flex-end;
+  }
+  .headline { font-size: 3rem; margin-bottom: 2rem; }
+  .dotRow { flex-direction: row; }
+  .dotLbl { display: none; }
+  .rightPanel { padding: 2rem 5vw; align-items: flex-start; }
 }

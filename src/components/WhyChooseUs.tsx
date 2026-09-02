@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import styles from "./WhyChooseUs.module.css";
 
 const reasons = [
@@ -38,9 +38,15 @@ const marqueeItems = [
 
 export default function WhyChooseUs() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Detect touch device
+    const checkTouch = () => setIsTouchDevice(window.matchMedia('(hover: none)').matches);
+    checkTouch();
+    window.matchMedia('(hover: none)').addEventListener('change', checkTouch);
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -52,6 +58,19 @@ export default function WhyChooseUs() {
     if (headerRef.current) observer.observe(headerRef.current);
     return () => observer.disconnect();
   }, []);
+
+  const handleRowClick = useCallback((i: number) => {
+    // On touch devices, clicking toggles open/close
+    setActiveIndex((prev) => (prev === i ? null : i));
+  }, []);
+
+  const handleMouseEnter = useCallback((i: number) => {
+    if (!isTouchDevice) setActiveIndex(i);
+  }, [isTouchDevice]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (!isTouchDevice) setActiveIndex(null);
+  }, [isTouchDevice]);
 
   return (
     <section id="why-us" className={styles.wrapper}>
@@ -77,9 +96,14 @@ export default function WhyChooseUs() {
           return (
             <div
               key={i}
+              role="button"
+              tabIndex={0}
+              aria-expanded={isOpen}
               className={`${styles.accordionRow} ${isOpen ? styles.accordionOpen : ""}`}
-              onMouseEnter={() => setActiveIndex(i)}
-              onMouseLeave={() => setActiveIndex(null)}
+              onMouseEnter={() => handleMouseEnter(i)}
+              onMouseLeave={handleMouseLeave}
+              onClick={() => handleRowClick(i)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleRowClick(i); }}
             >
               <div className={styles.accordionTop}>
                 <span className={styles.accIndex}>{String(i + 1).padStart(2, "0")}</span>

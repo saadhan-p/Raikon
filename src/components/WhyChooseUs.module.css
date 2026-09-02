@@ -131,6 +131,8 @@
   cursor: pointer;
   position: relative;
   transition: padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 .accordionRow:first-child {
@@ -279,6 +281,28 @@
 }
 
 @media (max-width: 768px) {
+  .wrapper {
+    padding: 8vh 0 0;
+  }
+
+  .header {
+    padding: 0 5vw 6vh;
+  }
+
+  .accordionList {
+    padding: 0 5vw;
+    margin-bottom: 5vh;
+  }
+
+  .accordionRow {
+    padding: 1.75rem 0;
+  }
+
+  .accordionRow:hover,
+  .accordionOpen {
+    padding: 2.25rem 0;
+  }
+
   .accDesc {
     padding-left: 0;
     font-size: 1rem;
