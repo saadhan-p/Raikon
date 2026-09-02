@@ -5,11 +5,8 @@ import styles from "./Navbar.module.css";
 
 const navItems = [
   { label: "Services", id: "services" },
-  { label: "Collaboration", id: "collaboration" },
   { label: "How We Work", id: "process" },
   { label: "Why Choose Us", id: "why-us" },
-  { label: "Partnership Model", id: "royalty" },
-  { label: "Case Studies", id: "cases" },
 ];
 
 const scrollPhrases = [
