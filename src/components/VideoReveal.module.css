@@ -77,3 +77,25 @@
 .overlay {
   display: none;
 }
+
+@media (max-width: 700px) {
+  .revealSection {
+    height: 190vh;
+  }
+
+  .sticky {
+    height: 100svh;
+  }
+
+  .box {
+    width: min(92vw, 58vh);
+    height: min(92vw, 58vh);
+  }
+
+  .tagline {
+    top: 72%;
+    font-size: clamp(1.65rem, 9vw, 2.5rem);
+    max-width: 90vw;
+    white-space: normal;
+  }
+}

@@ -164,6 +164,17 @@ export default function Services() {
     return () => { document.body.style.overflow = ""; };
   }, [active]);
 
+  useEffect(() => {
+    if (!active) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActive(null);
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [active]);
+
   // Update phrases randomly on scroll
   useEffect(() => {
     setPhrases(services.map(() => scrollPhrases[Math.floor(Math.random() * scrollPhrases.length)]));
@@ -261,7 +272,7 @@ export default function Services() {
           />
 
           {/* Panel */}
-          <div className={styles.drawer}>
+          <div className={styles.drawer} role="dialog" aria-modal="true" aria-labelledby="service-drawer-title">
             {/* Close */}
             <button
               className={styles.drawerClose}
@@ -281,7 +292,7 @@ export default function Services() {
                 <span className={styles.drawerCategory}>{active.category}</span>
               </div>
 
-              <h3 className={styles.drawerTitle}>{active.title}</h3>
+              <h3 id="service-drawer-title" className={styles.drawerTitle}>{active.title}</h3>
               <p className={styles.drawerTagline}>&ldquo;{active.tagline}&rdquo;</p>
               <p className={styles.drawerDesc}>{active.description}</p>
 

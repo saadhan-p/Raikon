@@ -141,19 +141,20 @@
 
 /* ════════════ MOBILE ════════════ */
 @media (max-width: 900px) {
-  .wrapper { height: 450vh; }
+  .wrapper { height: 280vh; }
   .sticky {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
+    height: 100svh;
   }
   .leftPanel {
-    padding: 5rem 5vw 2rem;
+    padding: 2rem 5vw 1.5rem;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     justify-content: flex-end;
   }
-  .headline { font-size: 3rem; margin-bottom: 2rem; }
+  .headline { font-size: clamp(2.25rem, 11vw, 3rem); margin-bottom: 1.25rem; }
   .dotRow { flex-direction: row; }
   .dotLbl { display: none; }
-  .rightPanel { padding: 2rem 5vw; align-items: flex-start; }
+  .rightPanel { padding: 1.5rem 5vw 2rem; align-items: flex-start; }
 }

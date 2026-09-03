@@ -66,6 +66,23 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [menuOpen]);
+
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     setMenuOpen(false);
@@ -92,6 +109,8 @@ export default function Navbar() {
             className={styles.menuBtn}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle Navigation Menu"
+            aria-expanded={menuOpen}
+            aria-controls="site-navigation"
           >
             {menuOpen ? (
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -109,7 +128,7 @@ export default function Navbar() {
       {/* Full screen dropdown menu */}
       <div className={`${styles.menuOverlay} ${menuOpen ? styles.menuOverlayOpen : ""}`}>
         <div className={styles.menuInner}>
-          <nav className={styles.navList}>
+          <nav id="site-navigation" className={styles.navList} aria-label="Primary navigation">
             {navItems.map((item) => (
               <a
                 key={item.id}

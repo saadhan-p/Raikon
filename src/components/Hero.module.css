@@ -1030,6 +1030,44 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Keep the first screen informative on mobile instead of making users scroll
+   through two viewport-height scenes before reaching the headline. */
+@media (max-width: 700px) {
+  .scrollHero {
+    min-height: auto;
+  }
+
+  .videoBg,
+  .videoOverlay {
+    height: 76svh;
+  }
+
+  .openingFrame {
+    height: 76svh;
+    min-height: 76svh;
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+  }
+
+  .metaStripWrapper {
+    padding: 0 5vw max(16px, env(safe-area-inset-bottom));
+  }
+
+  .openingCopy {
+    min-height: auto;
+    padding: 72px 0 56px;
+  }
+
+  .descWrapper {
+    margin-top: 28px;
+    padding: 0 8px;
+  }
+
+  .descWrapper p {
+    font-size: .8rem;
+    line-height: 1.55;
+  }
+}
+
 @keyframes cursorFadeIn {
   from {
     opacity: 0;

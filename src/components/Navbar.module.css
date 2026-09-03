@@ -82,6 +82,8 @@
   border: none;
   color: #f5f5eb;
   cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
   padding: 0;
   flex-shrink: 0;
 }
@@ -196,6 +198,7 @@
 
 @media (max-width: 700px) {
   .header {
+    top: max(12px, env(safe-area-inset-top));
     padding: 0 12px;
   }
 
@@ -209,8 +212,10 @@
   }
 
   .menuOverlay {
-    top: 82px;
+    top: calc(max(12px, env(safe-area-inset-top)) + 62px);
     width: calc(100% - 24px);
+    max-height: calc(100dvh - max(12px, env(safe-area-inset-top)) - 78px);
+    overflow-y: auto;
   }
 
   .ctaRow {

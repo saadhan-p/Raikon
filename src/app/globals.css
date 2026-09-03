@@ -43,6 +43,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 88px;
   background: var(--paper);
 }
 
@@ -51,6 +52,15 @@ body {
   color: var(--ink);
   background: var(--paper);
   font-family: 'Instrument Sans', Arial, sans-serif;
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a,
+input,
+textarea {
+  touch-action: manipulation;
 }
 
 a {
@@ -548,6 +558,12 @@ footer p {
 @media (max-width:768px) {
   .section {
     padding: 70px 0;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
   }
 }
 

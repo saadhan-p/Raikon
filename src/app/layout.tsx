@@ -3,38 +3,34 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://raikon.tech"),
-  title: "Raikon | Innovative Digital Partner & Tech Fixers",
-  description: "We don't build websites. We build digital weapons for businesses that refuse to blend in. Explore our growth partnership and royalty models.",
-  keywords: ["digital agency", "tech fixers", "web development Mysuru", "software development", "growth partnership", "startup tech partner"],
+  applicationName: "Raikon",
+  title: "Raikon | Digital Partner for Ambitious Businesses",
+  description: "Raikon is a Mysuru-based digital partner that builds bespoke websites, digital products, and growth-focused technology for ambitious businesses.",
+  keywords: ["digital agency", "web development Mysuru", "software development", "digital product development", "growth partnership", "startup tech partner"],
   authors: [{ name: "Raikon" }],
   creator: "Raikon",
   publisher: "Raikon",
+  category: "Digital agency",
+  alternates: {
+    canonical: "/",
+  },
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   openGraph: {
-    title: "Raikon | Innovative Digital Partner & Tech Fixers",
-    description: "We don't build websites. We build digital weapons for businesses that refuse to blend in.",
-    url: "https://raikon.tech",
+    title: "Raikon | Digital Partner for Ambitious Businesses",
+    description: "Bespoke websites, digital products, and growth-focused technology from Raikon.",
+    url: "/",
     siteName: "Raikon",
-    images: [
-      {
-        url: "/favicon.svg", // Fallback to our nice new logo for now
-        width: 800,
-        height: 600,
-        alt: "Raikon Logo",
-      }
-    ],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Raikon | Innovative Digital Partner & Tech Fixers",
-    description: "We don't build websites. We build digital weapons for businesses that refuse to blend in.",
-    images: ["/favicon.svg"],
+    title: "Raikon | Digital Partner for Ambitious Businesses",
+    description: "Bespoke websites, digital products, and growth-focused technology from Raikon.",
   },
   robots: {
     index: true,
@@ -48,12 +44,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
-    ],
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
   },
 };
 
