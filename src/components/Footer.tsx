@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -32,9 +33,11 @@ export default function Footer() {
           {/* Left Column: Logo & CTA */}
           <div className={styles.leftCol}>
             <div style={{ marginBottom: "2rem" }}>
-              <img 
+              <Image 
                 src="/raikon-logo-footer.png" 
                 alt="Raikon Logo" 
+                width={200}
+                height={60}
                 style={{ width: "200px", height: "auto" }} 
               />
             </div>

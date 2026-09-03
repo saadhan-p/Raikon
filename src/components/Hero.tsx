@@ -63,7 +63,10 @@ export default function Hero() {
       const travelY = isMobile ? startY - 28 : 185;
       hero.style.setProperty("--brand-scale", String(1 - progress * 0.87));
       hero.style.setProperty("--brand-y", `${startY - progress * travelY}px`);
-      hero.style.setProperty("--brand-opacity", "1");
+      // Fade out the wordmark as the navbar appears (progress approaches 1)
+      const fadeStart = 0.85;
+      const brandOpacity = progress < fadeStart ? 1 : Math.max(0, 1 - (progress - fadeStart) / (1 - fadeStart));
+      hero.style.setProperty("--brand-opacity", String(brandOpacity));
       hero.style.setProperty("--scroll-offset", `${scrollY}px`);
       setRaikonAtHeader(progress >= 1);
     };
@@ -71,15 +74,15 @@ export default function Hero() {
     window.addEventListener("scroll", updateBrand, { passive: true });
     window.addEventListener("touchmove", updateBrand, { passive: true });
     window.addEventListener("resize", updateBrand);
-    return () => { 
-      window.removeEventListener("scroll", updateBrand); 
+    return () => {
+      window.removeEventListener("scroll", updateBrand);
       window.removeEventListener("touchmove", updateBrand);
-      window.removeEventListener("resize", updateBrand); 
+      window.removeEventListener("resize", updateBrand);
     };
   }, []);
 
   return (
-    <section id="hero" className={styles.scrollHero} ref={heroRef}>
+    <section id="hero" className={styles.scrollHero} ref={heroRef} style={{ "--brand-opacity": "0" } as React.CSSProperties}>
       {/* ── Video Background ── */}
       <video
         className={styles.videoBg}
@@ -100,14 +103,16 @@ export default function Hero() {
           <span>[ SCROLL DOWN ]</span>
         </div>
       )}
-      <a className={styles.introMark} href="#hero" aria-label="Raikon home">
-        raikon
-        <span>
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M11.2 2.4L2.8 13.6h7.6l-1.6 8 8.8-11.2h-7.6l1.6-8z" />
-          </svg>
-        </span>
-      </a>
+      {!raikonAtHeader && (
+        <a className={styles.introMark} href="#hero" aria-label="Raikon home">
+          raikon
+          <span>
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11.2 2.4L2.8 13.6h7.6l-1.6 8 8.8-11.2h-7.6l1.6-8z" />
+            </svg>
+          </span>
+        </a>
+      )}
       <div className="container">
         <div className={styles.openingFrame}>
           <div
@@ -174,12 +179,12 @@ export default function Hero() {
         </div>
 
         <div className={styles.openingCopy}>
-          <div className={styles.creativeHeadline}>
+          <h1 className={styles.creativeHeadline}>
             <span className={styles.parallaxWord} style={{ '--speed': '0.05' } as React.CSSProperties}>YOUR IDEA</span>
             <span className={styles.parallaxWord} style={{ '--speed': '-0.08' } as React.CSSProperties}>DESERVES</span>
             <span className={styles.parallaxWord} style={{ '--speed': '0.08' } as React.CSSProperties}>BETTER THAN</span>
             <span className={styles.parallaxWord} style={{ '--speed': '-0.04' } as React.CSSProperties}>GENERIC TECH.</span>
-          </div>
+          </h1>
           <div className={styles.descWrapper}>
             <p>We don&apos;t build websites. We build digital weapons for businesses that refuse to blend in.</p>
           </div>

@@ -454,7 +454,7 @@
   top: var(--brand-y);
   transform: scale(var(--brand-scale));
   transform-origin: left top;
-  transition: opacity .12s linear;
+  transition: opacity .2s ease;
   z-index: 151;
 }
 
