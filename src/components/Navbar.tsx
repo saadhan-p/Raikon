@@ -158,11 +158,11 @@ export default function Navbar() {
                 SCHEDULE A CALL
               </a>
               <a
-                href="#royalty"
+                href="#services"
                 className={styles.ctaDark}
-                onClick={(e) => handleLinkClick(e, "royalty")}
+                onClick={(e) => handleLinkClick(e, "services")}
               >
-                START A PROJECT
+                VIEW SERVICES
               </a>
             </div>
           </div>

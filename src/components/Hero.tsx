@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./Hero.module.css";
 
-const capabilities = ["Hyper-Optimized Architecture", "Unbreakable Infrastructure", "Pixel-Perfect Engineering"];
-const principles = ["Skin in the game", "Relentless innovation", "Engineered for scale", "Beyond the launch"];
+const capabilities = ["Clear Product Thinking", "Resilient Engineering", "Precise Digital Craft"];
+const principles = ["Thoughtful by default", "Built with care", "Made to last", "Ready for what is next"];
 
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
@@ -186,20 +186,20 @@ export default function Hero() {
             <span className={styles.parallaxWord} style={{ '--speed': '-0.04' } as React.CSSProperties}>GENERIC TECH.</span>
           </h1>
           <div className={styles.descWrapper}>
-            <p>We don&apos;t build websites. We build digital weapons for businesses that refuse to blend in.</p>
+            <p>We create considered digital experiences for businesses with a point of view.</p>
           </div>
         </div>
 
         <div className={styles.differencePanel}>
-          <div className={styles.panelHeader}><span>THE RAIKON DIFFERENCE</span><span>01 / UNCOMPROMISING QUALITY</span></div>
+          <div className={styles.panelHeader}><span>THE RAIKON STANDARD</span><span>01 / CRAFT, CLARITY, MOMENTUM</span></div>
           <div className={styles.signalList}>{capabilities.map((capability, index) => <span key={capability}><b>0{index + 1}</b>{capability}<i>✦</i></span>)}</div>
           <div className={styles.panelFooter}>
-            <p>Templates are for the uninspired. We forge bespoke digital experiences that captivate and convert.<br /><strong>Refuse to be ordinary.</strong></p>
-            <p>Speed isn&apos;t just a feature, it&apos;s a foundation. While competitors buffer, your brand accelerates.</p>
+            <p>Every decision earns its place. We shape bespoke experiences that feel clear, useful, and unmistakably yours.<br /><strong>Nothing generic. Nothing accidental.</strong></p>
+            <p>Speed is designed in from the start, so your brand feels as responsive as it looks.</p>
           </div>
           <div className={styles.principleStrip}>{principles.map((principle, index) => <span key={principle}><b>0{index + 1}</b>{principle}</span>)}</div>
         </div>
-        <div className={styles.ctaRow}><a href="#contact">LET&apos;S BUILD SOMETHING FEARLESS <b>↗</b></a><a href="#royalty">EXPLORE THE PARTNERSHIP MODEL <b>↓</b></a></div>
+        <div className={styles.ctaRow}><a href="#contact">START A CONVERSATION <b>↗</b></a><a href="#services">EXPLORE SERVICES <b>↓</b></a></div>
       </div>
     </section>
   );

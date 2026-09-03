@@ -10,9 +10,9 @@ const reasons = [
     desc: "Our team has built solutions for everyone from scrappy startups to Fortune 500 companies. We know what works. We know what fails. We've made every mistake so you don't have to.",
   },
   {
-    tag: "Aligned",
-    title: "We Actually Care",
-    desc: "Your success is our bonus check. We align with fixed-price, performance-based models. No 'more hours billed = more profit' trap. When you win, we win. When you suffer, we feel it.",
+    tag: "Focused",
+    title: "We Respect The Brief",
+    desc: "We start with the business problem, then choose the clearest path forward. No bloated scope. No theatre. Just thoughtful work that earns its place.",
   },
   {
     tag: "Open",
@@ -33,7 +33,7 @@ const reasons = [
 
 const marqueeItems = [
   "Experience", "Transparency", "Speed", "Trust", "Results",
-  "Honesty", "Craft", "Partnership", "Excellence", "Clarity",
+  "Honesty", "Craft", "Care", "Excellence", "Clarity",
 ];
 
 export default function WhyChooseUs() {

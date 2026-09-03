@@ -4,9 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://raikon.tech"),
   applicationName: "Raikon",
-  title: "Raikon | Digital Partner for Ambitious Businesses",
-  description: "Raikon is a Mysuru-based digital partner that builds bespoke websites, digital products, and growth-focused technology for ambitious businesses.",
-  keywords: ["digital agency", "web development Mysuru", "software development", "digital product development", "growth partnership", "startup tech partner"],
+  title: "Raikon | Digital Studio for Ambitious Brands",
+  description: "Raikon is a Mysuru-based digital studio creating bespoke websites, digital products, and technology that move businesses forward.",
+  keywords: ["digital studio", "web development Mysuru", "software development", "digital product development", "brand experience", "startup technology"],
   authors: [{ name: "Raikon" }],
   creator: "Raikon",
   publisher: "Raikon",
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "Raikon | Digital Partner for Ambitious Businesses",
-    description: "Bespoke websites, digital products, and growth-focused technology from Raikon.",
+    title: "Raikon | Digital Studio for Ambitious Brands",
+    description: "Bespoke websites, digital products, and technology built with intention.",
     url: "/",
     siteName: "Raikon",
     locale: "en_US",
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Raikon | Digital Partner for Ambitious Businesses",
-    description: "Bespoke websites, digital products, and growth-focused technology from Raikon.",
+    title: "Raikon | Digital Studio for Ambitious Brands",
+    description: "Bespoke websites, digital products, and technology built with intention.",
   },
   robots: {
     index: true,

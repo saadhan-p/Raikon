@@ -106,7 +106,7 @@ const services: Service[] = [
     id: "support",
     num: "05",
     title: "Support & Maintenance",
-    category: "PARTNERSHIP",
+    category: "CONTINUITY",
     tagline: "A team that answers at 3 AM. Seriously.",
     description:
       "We don't ghost after launch. Real people, real response times, real accountability. We treat your system like it's ours — because in many ways, it still is.",
@@ -230,7 +230,7 @@ export default function Services() {
             <span className={styles.svcHeadBold}>build for you.</span>
           </h2>
           <p className={styles.svcSub}>
-            Six weapons. One team.<br />Zero compromises.
+            Six disciplines. One team.<br />One exacting standard.
           </p>
         </div>
       </div>

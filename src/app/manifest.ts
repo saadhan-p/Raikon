@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Raikon",
     short_name: "Raikon",
-    description: "Digital partner for ambitious businesses.",
+    description: "A digital studio for ambitious brands.",
     start_url: "/",
     display: "standalone",
     background_color: "#1a1a18",
