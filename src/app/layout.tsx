@@ -2,14 +2,14 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://raikon.tech"),
-  applicationName: "Raikon",
-  title: "Raikon | Digital Studio for Ambitious Brands",
-  description: "Raikon is a Mysuru-based digital studio creating bespoke websites, digital products, and technology that move businesses forward.",
+  metadataBase: new URL("https://lillgiants.com"),
+  applicationName: "Lil Gaints",
+  title: "Lil Gaints | Digital Studio for Ambitious Brands",
+  description: "Lil Gaints is a Mysuru-based digital studio creating bespoke websites, digital products, and technology that move businesses forward.",
   keywords: ["digital studio", "web development Mysuru", "software development", "digital product development", "brand experience", "startup technology"],
-  authors: [{ name: "Raikon" }],
-  creator: "Raikon",
-  publisher: "Raikon",
+  authors: [{ name: "Lil Gaints" }],
+  creator: "Lil Gaints",
+  publisher: "Lil Gaints",
   category: "Digital agency",
   alternates: {
     canonical: "/",
@@ -20,16 +20,16 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "Raikon | Digital Studio for Ambitious Brands",
+    title: "Lil Gaints | Digital Studio for Ambitious Brands",
     description: "Bespoke websites, digital products, and technology built with intention.",
     url: "/",
-    siteName: "Raikon",
+    siteName: "Lil Gaints",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Raikon | Digital Studio for Ambitious Brands",
+    title: "Lil Gaints | Digital Studio for Ambitious Brands",
     description: "Bespoke websites, digital products, and technology built with intention.",
   },
   robots: {

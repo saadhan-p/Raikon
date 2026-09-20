@@ -449,6 +449,7 @@
   letter-spacing: 0;
   text-transform: lowercase;
   line-height: .75;
+  white-space: nowrap;
   opacity: var(--brand-opacity);
   position: fixed;
   top: var(--brand-y);
@@ -757,8 +758,8 @@
   }
 
   .introMark {
-    font-size: 15vw;
-    left: 5vw;
+    font-size: 13vw;
+    left: 4vw;
     top: var(--brand-y);
     transform: scale(var(--brand-scale));
     transform-origin: left top;

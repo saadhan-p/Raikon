@@ -907,3 +907,23 @@ main>section {
     transition-duration: .01ms !important;
   }
 }
+
+/* ── Very small screen safety net ── */
+@media (max-width: 480px) {
+  /* Ensure nothing bleeds horizontally */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* Tighten generic section padding */
+  .section {
+    padding: 52px 0;
+  }
+
+  /* Hide the decorative giant "/" pseudo-element that overflows on tiny screens */
+  [class*="servicesSection"] .container::before,
+  [class*="royaltySection"] .container::before,
+  [class*="contactSection"] .container::before {
+    display: none;
+  }
+}

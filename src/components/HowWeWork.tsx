@@ -88,96 +88,40 @@ export default function HowWeWork() {
           </div>
         </div>
 
-        {/* Right panel — inline styles guarantee no global overrides */}
+        {/* Right panel — CSS classes handle responsive sizing */}
         <div className={styles.rightPanel}>
-          <div style={{ position: "relative", width: "100%", maxWidth: 560 }}>
+          <div className={styles.stepContent}>
 
             {/* Ghost large number watermark */}
-            <div style={{
-              position: "absolute",
-              top: -40,
-              left: -10,
-              fontSize: "clamp(10rem, 18vw, 18rem)",
-              fontWeight: 900,
-              letterSpacing: "-0.07em",
-              lineHeight: 1,
-              color: "rgba(255,255,255,0.04)",
-              userSelect: "none",
-              pointerEvents: "none",
-              transition: "color 0.8s ease",
-              zIndex: 0,
-            }}>
+            <div className={styles.stepGhost}>
               {step.number}
             </div>
 
             {/* Content */}
-            <div style={{ position: "relative", zIndex: 1 }}>
+            <div className={styles.stepContentInner}>
 
               {/* Tag */}
-              <div style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.6rem",
-                fontSize: "0.72rem",
-                fontWeight: 800,
-                letterSpacing: "0.25em",
-                textTransform: "uppercase",
-                color: "#e8502a",
-                marginBottom: "1.5rem",
-              }}>
-                <span style={{ display: "inline-block", width: 28, height: 2, background: "#e8502a", borderRadius: 1 }} />
+              <div className={styles.stepTag}>
+                <span className={styles.stepTagBar} />
                 {step.tag}
               </div>
 
               {/* Title */}
-              <h3 style={{
-                fontSize: "clamp(3rem, 5.5vw, 6rem)",
-                fontWeight: 900,
-                letterSpacing: "-0.05em",
-                lineHeight: 0.9,
-                color: "#ffffff",
-                margin: "0 0 2rem",
-              }}>
+              <h3 className={styles.stepTitle}>
                 {step.title}
               </h3>
 
               {/* Description */}
-              <p style={{
-                fontSize: "clamp(1rem, 1.5vw, 1.2rem)",
-                color: "rgba(255,255,255,0.5)",
-                lineHeight: 1.65,
-                margin: "0 0 2.5rem",
-                maxWidth: 480,
-              }}>
+              <p className={styles.stepDesc}>
                 {step.description}
               </p>
 
               {/* Deliverable */}
-              <div style={{
-                display: "inline-flex",
-                alignItems: "flex-start",
-                gap: "1rem",
-                padding: "1.25rem 1.5rem",
-                border: "1px solid rgba(232,80,42,0.2)",
-                borderRadius: 14,
-                background: "rgba(232,80,42,0.04)",
-              }}>
-                <span style={{ color: "#e8502a", fontSize: "1rem", marginTop: 2 }}>↗</span>
+              <div className={styles.stepDeliverable}>
+                <span className={styles.deliverableIcon}>↗</span>
                 <div>
-                  <div style={{
-                    fontSize: "0.6rem",
-                    fontWeight: 800,
-                    letterSpacing: "0.2em",
-                    textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.3)",
-                    marginBottom: "0.3rem",
-                  }}>You Get</div>
-                  <div style={{
-                    fontSize: "0.95rem",
-                    fontWeight: 500,
-                    color: "rgba(255,255,255,0.85)",
-                    lineHeight: 1.4,
-                  }}>
+                  <div className={styles.deliverableLabel}>You Get</div>
+                  <div className={styles.deliverableValue}>
                     {step.deliverable}
                   </div>
                 </div>
@@ -186,6 +130,7 @@ export default function HowWeWork() {
             </div>
           </div>
         </div>
+
 
         {/* Bottom progress */}
         <div className={styles.progressBar}>

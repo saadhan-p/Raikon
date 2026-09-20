@@ -35,7 +35,7 @@ export default function Footer() {
             <div style={{ marginBottom: "2rem" }}>
               <Image 
                 src="/raikon-logo-footer.png" 
-                alt="Raikon Logo" 
+                alt="Lil Gaints Logo" 
                 width={200}
                 height={60}
                 style={{ width: "200px", height: "auto" }} 
@@ -66,7 +66,7 @@ export default function Footer() {
         {/* Sub-Footer: Meta Info & Copyright */}
         <div className={styles.subFooter}>
           <div className={styles.copyright}>
-            © {currentYear} RAIKON. We fix tech problems. We don't create them.
+            © {currentYear} LIL GAINTS. We fix tech problems. We don't create them.
           </div>
           
           <div className={styles.locationInfo}>

@@ -92,3 +92,14 @@
 .copyright {
   font-weight: 500;
 }
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 48px 0 28px;
+  }
+
+  .leftCol h3 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+}

@@ -12,11 +12,11 @@ import VideoReveal from "@/components/VideoReveal";
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Raikon",
-  url: "https://raikon.tech",
-  logo: "https://raikon.tech/favicon.ico",
-  description: "Raikon builds bespoke websites, digital products, and growth-focused technology for ambitious businesses.",
-  sameAs: ["https://www.linkedin.com/company/raikon-tech"],
+  name: "Lil Gaints",
+  url: "https://lillgiants.com",
+  logo: "https://lillgiants.com/favicon.ico",
+  description: "Lil Gaints builds bespoke websites, digital products, and growth-focused technology for ambitious businesses.",
+  sameAs: ["https://www.linkedin.com/company/lil-gaints"],
   address: {
     "@type": "PostalAddress",
     addressLocality: "Mysuru",

@@ -141,20 +141,167 @@
 
 /* ════════════ MOBILE ════════════ */
 @media (max-width: 900px) {
-  .wrapper { height: 280vh; }
+  .wrapper {
+    height: 280vh;
+  }
+
   .sticky {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     height: 100svh;
   }
+
   .leftPanel {
     padding: 2rem 5vw 1.5rem;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     justify-content: flex-end;
   }
-  .headline { font-size: clamp(2.25rem, 11vw, 3rem); margin-bottom: 1.25rem; }
-  .dotRow { flex-direction: row; }
-  .dotLbl { display: none; }
-  .rightPanel { padding: 1.5rem 5vw 2rem; align-items: flex-start; }
+
+  .headline {
+    font-size: clamp(2.25rem, 11vw, 3rem);
+    margin-bottom: 1.25rem;
+  }
+
+  .dotRow {
+    flex-direction: row;
+  }
+
+  .dotLbl {
+    display: none;
+  }
+
+  .rightPanel {
+    padding: 1.5rem 5vw 2rem;
+    align-items: flex-start;
+    overflow: hidden;
+  }
+}
+
+/* ════════════ STEP CONTENT CLASSES ════════════ */
+.stepContent {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+}
+
+.stepGhost {
+  position: absolute;
+  top: -40px;
+  left: -10px;
+  font-size: clamp(10rem, 18vw, 18rem);
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.04);
+  user-select: none;
+  pointer-events: none;
+  transition: color 0.8s ease;
+  z-index: 0;
+}
+
+.stepContentInner {
+  position: relative;
+  z-index: 1;
+}
+
+.stepTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #e8502a;
+  margin-bottom: 1.5rem;
+}
+
+.stepTagBar {
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: #e8502a;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.stepTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2.4rem, 5.5vw, 6rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  color: #ffffff;
+  margin: 0 0 2rem;
+}
+
+.stepDesc {
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.65;
+  margin: 0 0 2.5rem;
+  max-width: 480px;
+}
+
+.stepDeliverable {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(232, 80, 42, 0.2);
+  border-radius: 14px;
+  background: rgba(232, 80, 42, 0.04);
+}
+
+.deliverableIcon {
+  color: #e8502a;
+  font-size: 1rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.deliverableLabel {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 0.3rem;
+}
+
+.deliverableValue {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .stepGhost {
+    font-size: clamp(5rem, 18vw, 9rem);
+    top: -15px;
+    left: -5px;
+  }
+
+  .stepTag {
+    margin-bottom: 0.75rem;
+  }
+
+  .stepTitle {
+    font-size: clamp(1.85rem, 7vw, 2.6rem);
+    margin: 0 0 1.25rem;
+  }
+
+  .stepDesc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+  }
+
+  .stepDeliverable {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem 1.1rem;
+  }
 }

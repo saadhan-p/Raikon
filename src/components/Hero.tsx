@@ -13,7 +13,7 @@ export default function Hero() {
   const [cursor, setCursor] = useState<{ x: number; y: number; visible: boolean }>({
     x: 0, y: 0, visible: false,
   });
-  const [raikonAtHeader, setRaikonAtHeader] = useState(false);
+  const [lillGiantsAtHeader, setLillGiantsAtHeader] = useState(false);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     setCursor({ x: e.clientX, y: e.clientY, visible: true });
@@ -68,7 +68,7 @@ export default function Hero() {
       const brandOpacity = progress < fadeStart ? 1 : Math.max(0, 1 - (progress - fadeStart) / (1 - fadeStart));
       hero.style.setProperty("--brand-opacity", String(brandOpacity));
       hero.style.setProperty("--scroll-offset", `${scrollY}px`);
-      setRaikonAtHeader(progress >= 1);
+      setLillGiantsAtHeader(progress >= 1);
     };
     updateBrand();
     window.addEventListener("scroll", updateBrand, { passive: true });
@@ -95,7 +95,7 @@ export default function Hero() {
         aria-hidden="true"
       />
       <div className={styles.videoOverlay} aria-hidden="true" />
-      {cursor.visible && !raikonAtHeader && (
+      {cursor.visible && !lillGiantsAtHeader && (
         <div
           className={styles.cursorLabel}
           style={{ transform: `translate(${cursor.x + 20}px, ${cursor.y + 20}px)` }}
@@ -103,9 +103,9 @@ export default function Hero() {
           <span>[ SCROLL DOWN ]</span>
         </div>
       )}
-      {!raikonAtHeader && (
-        <a className={styles.introMark} href="#hero" aria-label="Raikon home">
-          raikon
+      {!lillGiantsAtHeader && (
+        <a className={styles.introMark} href="#hero" aria-label="Lil Gaints home">
+          lil gaints
           <span>
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M11.2 2.4L2.8 13.6h7.6l-1.6 8 8.8-11.2h-7.6l1.6-8z" />
@@ -118,8 +118,8 @@ export default function Hero() {
           <div
             className={styles.metaStripWrapper}
             style={{
-              opacity: raikonAtHeader ? 0 : 1,
-              pointerEvents: raikonAtHeader ? "none" : "auto",
+              opacity: lillGiantsAtHeader ? 0 : 1,
+              pointerEvents: lillGiantsAtHeader ? "none" : "auto",
               transition: "opacity 0.3s ease",
             }}
           >
@@ -135,7 +135,7 @@ export default function Hero() {
               <div className={styles.metaRight}>
                 <span className={styles.metaLabel}>FOLLOW US</span>
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">INSTAGRAM +</a>
-                <a href="https://www.linkedin.com/company/raikon-tech" target="_blank" rel="noopener noreferrer">LINKEDIN +</a>
+                <a href="https://www.linkedin.com/company/lil-gaints" target="_blank" rel="noopener noreferrer">LINKEDIN +</a>
                 <button
                   className={styles.langToggle}
                   onClick={() => setLang(lang === "EN" ? "NL" : "EN")}
@@ -170,7 +170,7 @@ export default function Hero() {
                   <div className={styles.cellSocials}>
                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">IG</a>
                     <span className={styles.separator}>/</span>
-                    <a href="https://www.linkedin.com/company/raikon-tech" target="_blank" rel="noopener noreferrer">IN</a>
+                    <a href="https://www.linkedin.com/company/lil-gaints" target="_blank" rel="noopener noreferrer">IN</a>
                   </div>
                 </div>
               </div>
@@ -191,7 +191,7 @@ export default function Hero() {
         </div>
 
         <div className={styles.differencePanel}>
-          <div className={styles.panelHeader}><span>THE RAIKON STANDARD</span><span>01 / CRAFT, CLARITY, MOMENTUM</span></div>
+          <div className={styles.panelHeader}><span>THE LIL GAINTS STANDARD</span><span>01 / CRAFT, CLARITY, MOMENTUM</span></div>
           <div className={styles.signalList}>{capabilities.map((capability, index) => <span key={capability}><b>0{index + 1}</b>{capability}<i>✦</i></span>)}</div>
           <div className={styles.panelFooter}>
             <p>Every decision earns its place. We shape bespoke experiences that feel clear, useful, and unmistakably yours.<br /><strong>Nothing generic. Nothing accidental.</strong></p>

@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Raikon - Digital Studio for Ambitious Brands";
+export const alt = "Lil Gaints - Digital Studio for Ambitious Brands";
 export const size = {
   width: 1200,
   height: 630,
@@ -24,7 +24,7 @@ export default function OpenGraphImage() {
       >
         <div style={{ alignItems: "center", display: "flex", fontSize: 34, letterSpacing: "-1px" }}>
           <span style={{ background: "#E14E26", display: "flex", height: 34, marginRight: 16, transform: "skewX(-24deg)", width: 12 }} />
-          raikon
+          lil gaints
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ color: "#E14E26", fontSize: 31, letterSpacing: "5px", marginBottom: 24 }}>DIGITAL STUDIO</div>
@@ -34,7 +34,7 @@ export default function OpenGraphImage() {
         </div>
         <div style={{ color: "#aaa79f", display: "flex", fontSize: 25, justifyContent: "space-between" }}>
           <span>Bespoke digital experiences for ambitious brands.</span>
-          <span>raikon.tech</span>
+          <span>lillgiants.com</span>
         </div>
       </div>
     ),

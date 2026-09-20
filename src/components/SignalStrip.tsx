@@ -10,7 +10,7 @@ const repeatedSignals = Array(10).fill(signals).flat();
 
 export default function SignalStrip() {
   return (
-    <div className="signal-strip" aria-label="Raikon principles">
+    <div className="signal-strip" aria-label="Lil Gaints principles">
       {/* Set a longer duration because the track is now much wider */}
       <div className="signal-track" style={{ animationDuration: '80s' }}>
         {repeatedSignals.map((signal, index) => (

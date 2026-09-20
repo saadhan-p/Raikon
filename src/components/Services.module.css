@@ -547,8 +547,14 @@
     gap: 20px;
   }
 
+  .sectionHeader {
+    padding: 44px 20px 32px;
+    gap: 18px;
+  }
+
   .svcSub {
     text-align: left;
+    max-width: 100%;
   }
 
   /* ── Bottom sheet on mobile ── */

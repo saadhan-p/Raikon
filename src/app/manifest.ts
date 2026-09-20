@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Raikon",
-    short_name: "Raikon",
+    name: "Lil Gaints",
+    short_name: "Lil Gaints",
     description: "A digital studio for ambitious brands.",
     start_url: "/",
     display: "standalone",

@@ -222,3 +222,13 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 380px) {
+  .centerMeta {
+    display: none;
+  }
+
+  .brandText {
+    font-size: 0.95rem;
+  }
+}

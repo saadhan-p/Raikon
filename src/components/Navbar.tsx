@@ -99,7 +99,7 @@ export default function Navbar() {
       <header className={`${styles.header} ${scrolled ? styles.headerVisible : ""}`}>
         <div className={styles.headerBar}>
           <a href="#hero" className={styles.brandIcon} onClick={(e) => handleLinkClick(e, "hero")}>
-            <span className={styles.brandText}>raikon</span>
+            <span className={styles.brandText}>lil gaints</span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="#E14E26">
               <path d="M11.2 2.4L2.8 13.6h7.6l-1.6 8 8.8-11.2h-7.6l1.6-8z" />
             </svg>

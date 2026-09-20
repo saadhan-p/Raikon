@@ -369,3 +369,21 @@
 .closingCta:hover .ctaArrow {
   transform: translateX(4px);
 }
+
+@media (max-width: 768px) {
+  .closing {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 6vh 5vw;
+    gap: 1.5rem;
+  }
+
+  .closingCta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .headerSub {
+    font-size: 1rem;
+  }
+}
