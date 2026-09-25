@@ -62,9 +62,17 @@ export default function Contact() {
   const currentValue = formData[currentStep.id as keyof typeof formData];
   const progress = (activeStep / STEPS.length) * 100;
 
+  const isFirstMount = useRef(true);
+
   useEffect(() => {
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
     const el = inputRef.current;
-    if (el && !isSubmitting && !isSubmitted) el.focus();
+    if (el && !isSubmitting && !isSubmitted) {
+      el.focus({ preventScroll: true });
+    }
   }, [activeStep, isSubmitting, isSubmitted]);
 
   // Character scramble loop while submitting
