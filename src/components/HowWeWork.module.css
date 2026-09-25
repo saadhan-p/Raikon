@@ -146,7 +146,7 @@
   }
 
   .wrapper {
-    height: 280vh;
+    height: 175vh;
     background: #080808;
   }
 
@@ -161,25 +161,25 @@
   }
 
   .leftPanel {
-    padding: 1.5rem 5vw 1rem;
+    padding: 1rem 5vw 0.6rem;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     justify-content: flex-end;
   }
 
   .eyebrow {
-    margin-bottom: 0.5rem;
-    font-size: 0.65rem;
+    margin-bottom: 0.35rem;
+    font-size: 0.62rem;
   }
 
   .headline {
-    font-size: clamp(1.8rem, 8vw, 2.5rem);
-    margin-bottom: 0.75rem;
+    font-size: clamp(1.5rem, 6.5vw, 2.1rem);
+    margin-bottom: 0.5rem;
   }
 
   .dotRow {
     flex-direction: row;
-    gap: 1rem;
+    gap: 0.85rem;
   }
 
   .dotLbl {
@@ -187,7 +187,7 @@
   }
 
   .rightPanel {
-    padding: 1.25rem 5vw 1.5rem;
+    padding: 1rem 5vw 1.25rem;
     align-items: center;
     overflow: hidden;
   }
@@ -294,29 +294,35 @@
 
 @media (max-width: 900px) {
   .stepGhost {
-    font-size: clamp(5rem, 18vw, 9rem);
-    top: -15px;
+    font-size: clamp(4.5rem, 16vw, 7.5rem);
+    top: -12px;
     left: -5px;
   }
 
   .stepTag {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.65rem;
   }
 
   .stepTitle {
-    font-size: clamp(1.85rem, 7vw, 2.6rem);
-    margin: 0 0 1.25rem;
+    font-size: clamp(1.5rem, 6.2vw, 2.1rem);
+    margin: 0 0 0.85rem;
   }
 
   .stepDesc {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin: 0 0 1.5rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0 0 1rem;
   }
 
   .stepDeliverable {
     width: 100%;
     box-sizing: border-box;
-    padding: 1rem 1.1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+  }
+
+  .deliverableValue {
+    font-size: 0.85rem;
   }
 }
