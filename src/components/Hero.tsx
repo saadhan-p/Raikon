@@ -55,19 +55,35 @@ export default function Hero() {
     const updateBrand = () => {
       const hero = heroRef.current;
       if (!hero) return;
-      const isMobile = window.innerWidth < 900;
-      if (isMobile) {
-        hero.style.setProperty("--brand-opacity", "1");
-        hero.style.setProperty("--brand-scale", "1");
-        setLillGiantsAtHeader(false);
-        return;
-      }
       const scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      const progress = Math.min(Math.max(scrollY / (window.innerHeight * 0.72), 0), 1);
-      const startY = 210;
-      const travelY = 185;
-      hero.style.setProperty("--brand-scale", String(1 - progress * 0.87));
-      hero.style.setProperty("--brand-y", `${startY - progress * travelY}px`);
+      const scrollDistance = window.innerHeight * 0.72;
+      const progress = Math.min(Math.max(scrollY / scrollDistance, 0), 1);
+      const isMobile = window.innerWidth < 900;
+
+      if (isMobile) {
+        // Mobile: Starts centered in the upper/mid hero, scales and travels up to the header
+        const startY = window.innerHeight * 0.35;
+        const targetY = 22;
+        const currentY = startY - progress * (startY - targetY);
+
+        // Center on screen at progress 0, smoothly shift towards header brand position at progress 1
+        const centerOffset = (window.innerWidth * 0.5) - 32;
+        const currentShiftX = -progress * centerOffset;
+
+        hero.style.setProperty("--brand-y-mobile", `${currentY}px`);
+        hero.style.setProperty("--brand-shift-x-mobile", `${currentShiftX}px`);
+        hero.style.setProperty("--brand-scale-mobile", String(1 - progress * 0.65));
+
+        // Softly fade out metadata grid early in scroll to completely avoid collision
+        const metaOpacity = Math.max(0, 1 - progress * 3.8);
+        hero.style.setProperty("--meta-opacity-mobile", String(metaOpacity));
+      } else {
+        const startY = 210;
+        const travelY = 185;
+        hero.style.setProperty("--brand-scale", String(1 - progress * 0.87));
+        hero.style.setProperty("--brand-y", `${startY - progress * travelY}px`);
+      }
+
       // Fade out the wordmark as the navbar appears (progress approaches 1)
       const fadeStart = 0.85;
       const brandOpacity = progress < fadeStart ? 1 : Math.max(0, 1 - (progress - fadeStart) / (1 - fadeStart));
@@ -87,7 +103,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" className={styles.scrollHero} ref={heroRef} style={{ "--brand-opacity": "0" } as React.CSSProperties}>
+    <section id="hero" className={styles.scrollHero} ref={heroRef} style={{ "--brand-opacity": "1" } as React.CSSProperties}>
       {/* ── Video Background ── */}
       <video
         className={styles.videoBg}

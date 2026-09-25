@@ -758,15 +758,18 @@
   }
 
   .introMark {
-    position: absolute !important;
-    top: max(32px, env(safe-area-inset-top, 24px)) !important;
-    left: 5vw !important;
-    transform: none !important;
-    font-size: clamp(1.8rem, 7.5vw, 2.6rem) !important;
+    position: fixed !important;
+    left: 50% !important;
+    top: var(--brand-y-mobile, 35vh) !important;
+    transform: translate(calc(-50% + var(--brand-shift-x-mobile, 0px)), -50%) scale(var(--brand-scale-mobile, 1)) !important;
+    transform-origin: center center !important;
+    font-size: clamp(2.2rem, 9.5vw, 3.6rem) !important;
     letter-spacing: -0.02em;
-    max-width: 90vw;
-    opacity: 1 !important;
-    z-index: 20;
+    max-width: 92vw;
+    text-align: center;
+    opacity: var(--brand-opacity) !important;
+    z-index: 151;
+    pointer-events: none;
   }
 
   .openingFrame {
@@ -1089,6 +1092,8 @@
 
   .metaStripWrapper {
     padding: 0 5vw max(16px, env(safe-area-inset-bottom));
+    opacity: var(--meta-opacity-mobile, 1);
+    transition: opacity 0.15s ease;
   }
 
   .openingCopy {
