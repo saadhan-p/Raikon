@@ -55,12 +55,17 @@ export default function Hero() {
     const updateBrand = () => {
       const hero = heroRef.current;
       if (!hero) return;
+      const isMobile = window.innerWidth < 900;
+      if (isMobile) {
+        hero.style.setProperty("--brand-opacity", "1");
+        hero.style.setProperty("--brand-scale", "1");
+        setLillGiantsAtHeader(false);
+        return;
+      }
       const scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
       const progress = Math.min(Math.max(scrollY / (window.innerHeight * 0.72), 0), 1);
-      // Scale Y start and travel distance with viewport height for mobile
-      const isMobile = window.innerWidth < 768;
-      const startY = isMobile ? window.innerHeight * 0.22 : 210;
-      const travelY = isMobile ? startY - 28 : 185;
+      const startY = 210;
+      const travelY = 185;
       hero.style.setProperty("--brand-scale", String(1 - progress * 0.87));
       hero.style.setProperty("--brand-y", `${startY - progress * travelY}px`);
       // Fade out the wordmark as the navbar appears (progress approaches 1)

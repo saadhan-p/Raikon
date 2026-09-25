@@ -752,19 +752,21 @@
   font-size: 1.15rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .scrollHero {
     padding-bottom: 60px;
   }
 
   .introMark {
-    font-size: clamp(1.8rem, 8.8vw, 3.2rem) !important;
+    position: absolute !important;
+    top: max(32px, env(safe-area-inset-top, 24px)) !important;
     left: 5vw !important;
-    top: var(--brand-y);
-    transform: scale(var(--brand-scale));
-    transform-origin: left top;
+    transform: none !important;
+    font-size: clamp(1.8rem, 7.5vw, 2.6rem) !important;
     letter-spacing: -0.02em;
     max-width: 90vw;
+    opacity: 1 !important;
+    z-index: 20;
   }
 
   .openingFrame {
