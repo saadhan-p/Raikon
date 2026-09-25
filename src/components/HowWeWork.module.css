@@ -152,19 +152,25 @@
   }
 
   .leftPanel {
-    padding: 2rem 5vw 1.5rem;
+    padding: 1.5rem 5vw 1rem;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     justify-content: flex-end;
   }
 
+  .eyebrow {
+    margin-bottom: 0.5rem;
+    font-size: 0.65rem;
+  }
+
   .headline {
-    font-size: clamp(2.25rem, 11vw, 3rem);
-    margin-bottom: 1.25rem;
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    margin-bottom: 0.75rem;
   }
 
   .dotRow {
     flex-direction: row;
+    gap: 1rem;
   }
 
   .dotLbl {
@@ -172,8 +178,8 @@
   }
 
   .rightPanel {
-    padding: 1.5rem 5vw 2rem;
-    align-items: flex-start;
+    padding: 1.25rem 5vw 1.5rem;
+    align-items: center;
     overflow: hidden;
   }
 }

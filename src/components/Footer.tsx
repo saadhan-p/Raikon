@@ -1,6 +1,5 @@
 "use client";
 
-import Image from 'next/image';
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -32,15 +31,12 @@ export default function Footer() {
         <div className={styles.footerGrid}>
           {/* Left Column: Logo & CTA */}
           <div className={styles.leftCol}>
-            <div style={{ marginBottom: "2rem" }}>
-              <Image 
-                src="/raikon-logo-footer.png" 
-                alt="Lil Gaints Logo" 
-                width={200}
-                height={60}
-                style={{ width: "200px", height: "auto" }} 
-              />
-            </div>
+            <a href="#hero" className={styles.brandLogo} aria-label="Lil Gaints home">
+              <span className={styles.brandText}>lil gaints</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#E14E26">
+                <path d="M11.2 2.4L2.8 13.6h7.6l-1.6 8 8.8-11.2h-7.6l1.6-8z" />
+              </svg>
+            </a>
             <h3 className="gradient-text">
               Most tech companies are a gamble. <br />
               <span className="gradient-text-emerald">We're an investment.</span>

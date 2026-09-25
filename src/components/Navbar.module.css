@@ -46,10 +46,10 @@
 }
 
 .brandText {
-  font-family: var(--font-nova-round), system-ui, sans-serif;
+  font-family: var(--font-audiowide), 'Audiowide', system-ui, sans-serif;
   font-weight: 400;
-  font-size: 1.15rem;
-  letter-spacing: 0;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
   text-transform: lowercase;
   color: #E14E26;
   line-height: 1;

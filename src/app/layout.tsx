@@ -56,12 +56,12 @@ export const viewport: Viewport = {
   maximumScale: 5, // Improved accessibility
 };
 
-import { Nova_Round } from 'next/font/google'
+import { Audiowide } from 'next/font/google'
 
-const novaRound = Nova_Round({
+const audiowide = Audiowide({
   weight: '400',
   subsets: ['latin'],
-  variable: '--font-nova-round',
+  variable: '--font-audiowide',
 });
 
 export default function RootLayout({
@@ -71,7 +71,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={novaRound.variable}>
+      <body className={audiowide.variable}>
         {children}
       </body>
     </html>

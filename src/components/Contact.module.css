@@ -394,13 +394,276 @@
 }
 
 /* ══════════════════════
+   TRANSMITTING — OSCILLOSCOPE WAVEFORM
+   ══════════════════════ */
+.transmittingConsole {
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+  padding: 20px 0;
+  animation: stepIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Waveform container */
+.waveformWrap {
+  width: 100%;
+  border: 1px solid rgba(16, 16, 16, 0.1);
+  border-left: 3px solid #E14E26;
+  background: rgba(16, 16, 16, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.waveformSvg {
+  display: block;
+  width: 100%;
+  height: 80px;
+  overflow: visible;
+}
+
+.waveBaseline {
+  stroke: rgba(16, 16, 16, 0.15);
+  stroke-width: 1;
+  stroke-dasharray: 4 6;
+}
+
+.waveLine1 {
+  fill: none;
+  stroke: #E14E26;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  animation: waveShift1 1.6s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+.waveLine2 {
+  fill: none;
+  stroke: rgba(225, 78, 38, 0.22);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  animation: waveShift2 2.3s ease-in-out infinite alternate-reverse;
+  transform-origin: center;
+}
+
+.waveScanLine {
+  stroke: rgba(225, 78, 38, 0.5);
+  stroke-width: 1;
+  animation: scanSweep 2s linear infinite;
+  transform-box: fill-box;
+}
+
+.waveTick {
+  stroke: rgba(16, 16, 16, 0.18);
+  stroke-width: 1;
+}
+
+@keyframes waveShift1 {
+  0%   { transform: translateX(0px) scaleY(1); }
+  50%  { transform: translateX(-10px) scaleY(1.12); }
+  100% { transform: translateX(6px) scaleY(0.88); }
+}
+
+@keyframes waveShift2 {
+  0%   { transform: translateX(8px) scaleY(0.9); }
+  100% { transform: translateX(-12px) scaleY(1.15); }
+}
+
+@keyframes scanSweep {
+  from { transform: translateX(0); }
+  to   { transform: translateX(320px); }
+}
+
+.waveLabels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px 8px;
+  border-top: 1px solid rgba(16, 16, 16, 0.08);
+}
+
+.waveCh {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: #E14E26;
+  font-weight: 600;
+}
+
+.waveScramble {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  font-weight: 500;
+  text-transform: uppercase;
+  animation: textFlicker 0.1s step-end infinite;
+}
+
+.waveHz {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+@keyframes textFlicker {
+  0%, 94% { opacity: 1; }
+  95%, 97% { opacity: 0.7; }
+  100%     { opacity: 1; }
+}
+
+.transmitInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.telemetryTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: #E14E26;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.telemetryDot {
+  width: 6px;
+  height: 6px;
+  background: #E14E26;
+  border-radius: 50%;
+  animation: blink 0.8s ease-in-out infinite;
+}
+
+.phaseTracker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  background: rgba(16, 16, 16, 0.03);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.phaseStep {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  opacity: 0.45;
+  transition: all 0.35s ease;
+}
+
+.phaseStepActive {
+  opacity: 1;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.phaseNum {
+  color: #E14E26;
+  font-size: 0.62rem;
+}
+
+.frequencyBar {
+  width: 100%;
+  height: 2px;
+  background: var(--line);
+  overflow: hidden;
+  position: relative;
+}
+
+.freqTrack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 22%;
+  background: #E14E26;
+  animation: freqScan 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes freqScan {
+  from { left: 0%; width: 22%; }
+  to   { left: 78%; width: 22%; }
+}
+
+/* ══════════════════════
    SUCCESS SCREEN
    ══════════════════════ */
 .successScreen {
   width: 100%;
   max-width: 580px;
   position: relative;
-  animation: stepIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+  animation: stepIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.successHeaderRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.successBadgeGraphic {
+  flex-shrink: 0;
+}
+
+/* Slash-draw animation — lines draw in on success */
+.slashDraw {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: drawSlash 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.slashDraw2 {
+  stroke-dasharray: 18;
+  stroke-dashoffset: 18;
+  animation: drawSlash 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
+}
+
+@keyframes drawSlash {
+  to { stroke-dashoffset: 0; }
+}
+
+.telemetryPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(49, 95, 74, 0.08);
+  border: 1px solid rgba(49, 95, 74, 0.25);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--emerald);
+  font-weight: 500;
+}
+
+.greenPulse {
+  width: 6px;
+  height: 6px;
+  background: var(--emerald);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 6px rgba(49, 95, 74, 0.7);
+  animation: pulseDot 1.5s ease-in-out infinite;
 }
 
 .successEyebrow {
@@ -410,11 +673,11 @@
   text-transform: uppercase;
   color: var(--muted, #62625d);
   display: block;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .successTitle {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
   font-weight: 500;
   letter-spacing: -0.05em;
   line-height: 0.95;
@@ -426,7 +689,7 @@
   font-size: 1.05rem;
   color: var(--muted, #62625d);
   line-height: 1.65;
-  max-width: 460px;
+  max-width: 480px;
   margin-bottom: 1.5rem;
 }
 
@@ -454,6 +717,13 @@
   font-weight: 400;
 }
 
+.successMetaFooter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .resetBtn {
   background: transparent;
   color: var(--ink, #101010);
@@ -472,6 +742,14 @@
   border-color: var(--ink, #101010);
 }
 
+.registryNote {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
 /* ══════════════════════
    RESPONSIVE
    ══════════════════════ */
@@ -484,29 +762,63 @@
   .leftPanel {
     position: relative;
     height: auto;
-    padding: clamp(40px, 6vh, 64px) clamp(24px, 5vw, 48px);
-    gap: 3rem;
+    padding: clamp(32px, 5vh, 48px) clamp(20px, 5vw, 40px);
+    gap: 2rem;
     border-right: none;
     border-bottom: 1px solid var(--line);
   }
 
   .headline {
-    font-size: clamp(2.8rem, 10vw, 4rem);
+    font-size: clamp(2.2rem, 8vw, 3.4rem);
+  }
+
+  .leftBottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+
+  .statRow {
+    padding: 0;
+    border-top: none;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .statRow:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .statNum {
+    font-size: 1.3rem;
   }
 
   .rightPanel {
-    padding: clamp(40px, 6vh, 64px) clamp(24px, 5vw, 48px);
+    padding: clamp(32px, 5vh, 48px) clamp(20px, 5vw, 40px);
     justify-content: flex-start;
   }
 
   .questionLabel {
-    font-size: clamp(1.4rem, 5.5vw, 2rem);
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+  }
+
+  .stepCounter {
+    margin-bottom: 2rem;
   }
 }
 
 @media (max-width: 480px) {
   .tags { gap: 6px; }
-  .nextBtn { width: 100%; justify-content: center; }
-  .actions { flex-direction: column-reverse; align-items: flex-start; }
+  .actions { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .nextBtn { 
+    padding: 0.75rem 1.5rem;
+  }
 }
 

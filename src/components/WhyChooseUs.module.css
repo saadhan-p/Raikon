@@ -282,30 +282,45 @@
 
 @media (max-width: 768px) {
   .wrapper {
-    padding: 8vh 0 0;
+    padding: 6vh 0 0;
   }
 
   .header {
-    padding: 0 5vw 6vh;
+    padding: 0 5vw 4vh;
+  }
+
+  .headerTitle {
+    font-size: clamp(2rem, 7.5vw, 3.2rem);
   }
 
   .accordionList {
     padding: 0 5vw;
-    margin-bottom: 5vh;
+    margin-bottom: 4vh;
   }
 
   .accordionRow {
-    padding: 1.75rem 0;
+    padding: 1.5rem 0;
   }
 
   .accordionRow:hover,
   .accordionOpen {
-    padding: 2.25rem 0;
+    padding: 1.75rem 0;
+  }
+
+  .accordionRow:hover .accTitle,
+  .accordionOpen .accTitle {
+    transform: none;
+  }
+
+  .accTitle {
+    font-size: clamp(1.25rem, 5vw, 1.8rem);
   }
 
   .accDesc {
     padding-left: 0;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding-top: 1.25rem;
   }
 }
 

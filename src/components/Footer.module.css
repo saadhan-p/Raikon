@@ -19,6 +19,25 @@
   }
 }
 
+.brandLogo {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 4px;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
+
+.brandText {
+  font-family: var(--font-audiowide), 'Audiowide', system-ui, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-transform: lowercase;
+  color: #E14E26;
+  line-height: 1;
+}
+
 .leftCol h3 {
   font-size: 2rem;
   font-weight: 800;
@@ -98,8 +117,23 @@
     padding: 48px 0 28px;
   }
 
+  .brandLogo {
+    margin-bottom: 1.25rem;
+  }
+
+  .brandText {
+    font-size: 1.45rem;
+  }
+
   .leftCol h3 {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  .brandVoice {
+    padding: 18px;
+    font-size: 0.88rem;
+    margin-bottom: 20px;
   }
 }

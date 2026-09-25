@@ -442,13 +442,13 @@
 
 .introMark {
   color: #E14E26 !important;
-  font-family: var(--font-nova-round), system-ui, sans-serif;
-  font-size: clamp(8.4rem, 22.4vw, 22.4rem);
+  font-family: var(--font-audiowide), 'Audiowide', system-ui, sans-serif;
+  font-size: clamp(3.6rem, 11vw, 11rem);
   font-weight: 400;
   left: 4.1vw;
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
   text-transform: lowercase;
-  line-height: .75;
+  line-height: .88;
   white-space: nowrap;
   opacity: var(--brand-opacity);
   position: fixed;
@@ -477,7 +477,7 @@
 
 .openingFrame {
   min-height: 100vh;
-  padding-top: clamp(270px, 31vw, 480px);
+  padding-top: clamp(220px, 20vw, 360px);
   position: relative;
 }
 
@@ -752,22 +752,24 @@
   font-size: 1.15rem;
 }
 
-@media (max-width:700px) {
+@media (max-width: 768px) {
   .scrollHero {
-    padding-bottom: 74px;
+    padding-bottom: 60px;
   }
 
   .introMark {
-    font-size: 13vw;
-    left: 4vw;
+    font-size: clamp(1.8rem, 8.8vw, 3.2rem) !important;
+    left: 5vw !important;
     top: var(--brand-y);
     transform: scale(var(--brand-scale));
     transform-origin: left top;
+    letter-spacing: -0.02em;
+    max-width: 90vw;
   }
 
   .openingFrame {
-    min-height: 88vh;
-    padding-top: 37vw;
+    min-height: 80vh;
+    padding-top: 32vw;
   }
 
   .frameMeta {
@@ -775,7 +777,7 @@
   }
 
   .openingCopy {
-    padding: 35vw 0 15vw;
+    padding: 24vw 0 12vw;
   }
 
   .creativeHeadline {
@@ -788,20 +790,47 @@
   }
 
   .parallaxWord {
-    font-size: clamp(2rem, 10vw, 4rem) !important;
+    font-size: clamp(1.75rem, 8vw, 2.8rem) !important;
     white-space: normal;
-    line-height: 0.95;
-    word-break: break-word;
+    line-height: 1.05;
+    word-break: normal;
+    text-align: center;
   }
 
   .descWrapper {
-    margin-top: 50px;
+    margin-top: 36px;
+    padding: 0 12px;
+  }
+
+  .panelHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 14px 16px;
+    font-size: 0.65rem;
   }
 
   .signalList,
   .panelFooter,
   .principleStrip {
     grid-template-columns: 1fr;
+  }
+
+  .signalList span {
+    padding: 16px;
+    font-size: 1.05rem;
+    min-height: auto;
+  }
+
+  .panelFooter p {
+    padding: 16px;
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .principleStrip span {
+    padding: 12px 16px;
+    font-size: 0.68rem;
   }
 
   .signalList span,
@@ -820,7 +849,14 @@
 
   .ctaRow {
     flex-direction: column;
-    margin-top: 30px;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .ctaRow a {
+    min-height: 52px;
+    padding: 0 16px;
+    font-size: 0.72rem;
   }
 }
 
