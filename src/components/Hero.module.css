@@ -760,8 +760,8 @@
   .introMark {
     position: fixed !important;
     left: 50% !important;
-    top: var(--brand-y-mobile, 35vh) !important;
-    transform: translate(calc(-50% + var(--brand-shift-x-mobile, 0px)), -50%) scale(var(--brand-scale-mobile, 1)) !important;
+    top: var(--brand-y-mobile, 38vh) !important;
+    transform: translate(-50%, -50%) scale(var(--brand-scale-mobile, 1)) !important;
     transform-origin: center center !important;
     font-size: clamp(2.2rem, 9.5vw, 3.6rem) !important;
     letter-spacing: -0.02em;

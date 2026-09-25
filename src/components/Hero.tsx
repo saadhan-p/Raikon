@@ -61,18 +61,12 @@ export default function Hero() {
       const isMobile = window.innerWidth < 900;
 
       if (isMobile) {
-        // Mobile: Starts centered in the upper/mid hero, scales and travels up to the header
-        const startY = window.innerHeight * 0.35;
-        const targetY = 22;
-        const currentY = startY - progress * (startY - targetY);
-
-        // Center on screen at progress 0, smoothly shift towards header brand position at progress 1
-        const centerOffset = (window.innerWidth * 0.5) - 32;
-        const currentShiftX = -progress * centerOffset;
+        // Mobile: Stays centered horizontally and moves straight UP with the screen scroll
+        const startY = window.innerHeight * 0.38;
+        const currentY = startY - scrollY * 1.05;
 
         hero.style.setProperty("--brand-y-mobile", `${currentY}px`);
-        hero.style.setProperty("--brand-shift-x-mobile", `${currentShiftX}px`);
-        hero.style.setProperty("--brand-scale-mobile", String(1 - progress * 0.65));
+        hero.style.setProperty("--brand-scale-mobile", String(Math.max(0.75, 1 - progress * 0.25)));
 
         // Softly fade out metadata grid early in scroll to completely avoid collision
         const metaOpacity = Math.max(0, 1 - progress * 3.8);
