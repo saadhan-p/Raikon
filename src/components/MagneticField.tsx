@@ -168,6 +168,7 @@ export default function MagneticField({ className }: AttractorProps) {
     };
 
     const resize = () => {
+      if (!canvas.offsetWidth || !canvas.offsetHeight) return;
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
       buildGrid();
@@ -189,10 +190,10 @@ export default function MagneticField({ className }: AttractorProps) {
 
     const draw = () => {
       animId = requestAnimationFrame(draw);
-      frame++;
-
       const W = canvas.width;
       const H = canvas.height;
+      if (!W || !H) return;
+      frame++;
       const vel = Math.abs(velocityRef.current);
       velocityRef.current *= 0.88;
 
